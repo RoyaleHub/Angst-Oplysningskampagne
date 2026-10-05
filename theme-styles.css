@@ -1,0 +1,209 @@
+/* Theme Variables */
+:root {
+  /* Light theme (default) */
+  --primary-color: #3a6ea5;
+  --primary-dark: #2c5282;
+  --primary-light: #4c8dcd;
+  --secondary-color: #ff6b6b;
+  --secondary-dark: #e05252;
+  --secondary-light: #ff8a8a;
+  --dark-color: #2d3748;
+  --light-color: #f8fafc;
+  --text-color: #2d3748;
+  --light-text: #fff;
+  --gray-100: #f7fafc;
+  --gray-200: #edf2f7;
+  --gray-300: #e2e8f0;
+  --gray-400: #cbd5e0;
+  --gray-500: #a0aec0;
+  --gray-600: #718096;
+  --gray-700: #4a5568;
+  --gray-800: #2d3748;
+  --gray-900: #1a202c;
+  --success-color: #48bb78;
+  --warning-color: #ecc94b;
+  --danger-color: #f56565;
+  --background-color: #ffffff;
+  --card-background: #ffffff;
+  --header-background: #ffffff;
+  --footer-background: #2d3748;
+  --footer-text: #ffffff;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Dark theme */
+[data-theme="dark"] {
+  --primary-color: #4c8dcd;
+  --primary-dark: #3a6ea5;
+  --primary-light: #6ba5e5;
+  --secondary-color: #ff8a8a;
+  --secondary-dark: #ff6b6b;
+  --secondary-light: #ffa8a8;
+  --dark-color: #f8fafc;
+  --light-color: #1a202c;
+  --text-color: #e2e8f0;
+  --light-text: #ffffff;
+  --gray-100: #2d3748;
+  --gray-200: #4a5568;
+  --gray-300: #718096;
+  --gray-400: #a0aec0;
+  --gray-500: #cbd5e0;
+  --gray-600: #e2e8f0;
+  --gray-700: #edf2f7;
+  --gray-800: #f7fafc;
+  --gray-900: #f8fafc;
+  --success-color: #68d391;
+  --warning-color: #f6e05e;
+  --danger-color: #fc8181;
+  --background-color: #1a202c;
+  --card-background: #2d3748;
+  --header-background: #2d3748;
+  --footer-background: #1a202c;
+  --footer-text: #e2e8f0;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --box-shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* Apply theme to elements */
+body {
+  background-color: var(--background-color);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  background-color: var(--header-background);
+  box-shadow: var(--box-shadow);
+  transition: background-color 0.3s ease;
+}
+
+.nav-menu li a {
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.nav-menu li a:hover,
+.nav-menu li a.active {
+  color: var(--primary-color);
+}
+
+footer {
+  background-color: var(--footer-background);
+  color: var(--footer-text);
+  transition: background-color 0.3s ease;
+}
+
+.footer-contact ul li {
+  color: var(--gray-400);
+}
+
+.anxiety-type-card,
+.stat-card,
+.symptoms-card,
+.cta-card,
+.quiz-card,
+.team-member,
+.contact-form,
+.timeline-content {
+  background-color: var(--card-background);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.information,
+.cta,
+.video-main,
+.team-section {
+  background-color: var(--background-color);
+  transition: background-color 0.3s ease;
+}
+
+.types-of-anxiety,
+.statistics,
+.symptoms,
+.quiz-info,
+.project-section,
+.contact-section,
+.video-process {
+  background-color: var(--gray-100);
+  transition: background-color 0.3s ease;
+}
+
+/* Theme Toggle Button Styles */
+.theme-toggle {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: transparent;
+  border: 2px solid var(--text-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 15px;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  border-color: var(--primary-color);
+}
+
+.theme-toggle i {
+  font-size: 18px;
+  color: var(--text-color);
+  transition: color 0.3s ease;
+}
+
+.theme-toggle:hover i {
+  color: var(--primary-color);
+}
+
+/* Adjust auth modal for dark mode */
+[data-theme="dark"] #auth-modal {
+  background-color: var(--card-background);
+  color: var(--text-color);
+}
+
+[data-theme="dark"] #auth-modal label,
+[data-theme="dark"] #auth-modal p {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] #auth-modal input {
+  background-color: var(--gray-100);
+  color: var(--text-color);
+  border-color: var(--gray-300);
+}
+
+[data-theme="dark"] #auth-tabs button {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] #auth-tabs button.active {
+  border-bottom-color: var(--primary-color) !important;
+  color: var(--primary-color);
+}
+
+[data-theme="dark"] #forgot-password {
+  color: var(--primary-color);
+}
+
+/* Adjust login required overlay for dark mode */
+[data-theme="dark"] #login-required-overlay > div {
+  background-color: var(--card-background);
+}
+
+[data-theme="dark"] #login-required-overlay h2 {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] #login-required-overlay p {
+  color: var(--gray-400);
+}
+
+[data-theme="dark"] .login-required-cancel {
+  background-color: var(--gray-200);
+  color: var(--text-color);
+}

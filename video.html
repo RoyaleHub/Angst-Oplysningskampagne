@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<link rel="icon" href="https://www.angst.dk/wp-content/uploads/logo-trans-512x512-1.png">
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angst blandt unge | Video</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <!-- Add these lines to the <head> section of each HTML file -->
+    <link rel="stylesheet" href="theme-styles.css">
+    <script src="theme-toogle.js" defer></script>
+    <!-- AOS (Animate On Scroll) Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <!-- Professional Navigation Bar Styles -->
+    <style>
+    /* Professional Navigation Bar Styles */
+    .pro-header {
+      background-color: var(--background-color, #fff);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .pro-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pro-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .pro-logo img {
+      height: 45px;
+      transition: transform 0.3s ease;
+    }
+
+    .pro-logo img:hover {
+      transform: scale(1.05);
+    }
+
+    .pro-nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pro-nav-menu li {
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pro-nav-link {
+      display: block;
+      padding: 0.7rem 1rem;
+      color: var(--text-color, #2d3748);
+      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .pro-nav-link:hover {
+      color: var(--primary-color, #3a6ea5);
+      background-color: rgba(58, 110, 165, 0.08);
+    }
+
+    .pro-nav-link.active {
+      color: var(--primary-color, #3a6ea5);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .pro-nav-link.active::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background-color: var(--primary-color, #3a6ea5);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .pro-nav-link.active:hover::after {
+      width: 80%;
+    }
+
+    /* Hover underline for all nav links except active */
+    .pro-nav-link:not(.active):hover::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background-color: var(--primary-color, #3a6ea5);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .pro-nav-link:not(.active):hover::after {
+      width: 80%;
+    }
+
+    .pro-highlight .pro-btn-small {
+      background-color: var(--primary-color, #3a6ea5);
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(58, 110, 165, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .pro-highlight .pro-btn-small:hover {
+      background-color: var(--primary-dark, #2c5282);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(58, 110, 165, 0.4);
+    }
+
+    .pro-highlight .pro-btn-small:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 3px rgba(58, 110, 165, 0.3);
+    }
+
+    /* Theme toggle button styling */
+    .theme-toggle {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: transparent;
+      border: 2px solid var(--gray-300, #e2e8f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary-color, #3a6ea5);
+      background-color: rgba(58, 110, 165, 0.08);
+    }
+
+    .theme-toggle i {
+      font-size: 18px;
+      color: var(--text-color, #2d3748);
+      transition: color 0.3s ease;
+    }
+
+    .theme-toggle:hover i {
+      color: var(--primary-color, #3a6ea5);
+    }
+
+    /* Mobile menu toggle */
+    .pro-menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color, #2d3748);
+      background: transparent;
+      border: none;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .pro-menu-toggle:hover {
+      color: var(--primary-color, #3a6ea5);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .pro-nav-menu {
+        gap: 0.2rem;
+      }
+
+      .pro-nav-link {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pro-menu-toggle {
+        display: block;
+      }
+
+      .pro-nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--background-color, #fff);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 2rem 0;
+        transition: left 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 99;
+        gap: 1rem;
+      }
+
+      .pro-nav-menu.active {
+        left: 0;
+      }
+
+      .pro-nav-menu li {
+        width: 80%;
+        text-align: center;
+      }
+
+      .pro-nav-link {
+        padding: 1rem;
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .pro-nav-link.active::after {
+        bottom: 5px;
+        width: 30%;
+      }
+
+      .pro-highlight {
+        margin-top: 1rem;
+        width: 80%;
+      }
+
+      .pro-highlight .pro-btn-small {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      /* Adjust theme toggle in mobile view */
+      .pro-nav-menu .theme-toggle {
+        margin: 1rem 0;
+      }
+    }
+    
+    /* Carousel Styles */
+    .carousel-container {
+        position: relative;
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        overflow: hidden;
+        border-radius: 10px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+        height: 400px; /* Ensure fixed height for container */
+    }
+    .carousel-slides {
+        position: relative;
+        width: 100%;
+        height: 100%;
+    }
+    .carousel-slide {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .carousel-slide.active {
+        opacity: 1;
+        z-index: 2;
+    }
+    .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    .carousel-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(255, 255, 255, 0.7);
+        color: #333;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        font-size: 18px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        z-index: 10;
+    }
+    
+    .carousel-btn:hover {
+        background: rgba(255, 255, 255, 0.9);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .carousel-btn.prev {
+        left: 10px;
+    }
+    
+    .carousel-btn.next {
+        right: 10px;
+    }
+    
+    .carousel-indicators {
+        position: absolute;
+        bottom: 15px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        gap: 8px;
+    }
+    
+    .carousel-indicator {
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .carousel-indicator.active {
+        background: white;
+        transform: scale(1.2);
+    }
+    </style>
+</head>
+<body>
+    <!-- Professional Navigation Bar -->
+    <header class="pro-header">
+        <div class="pro-container">
+            <div class="pro-logo">
+                <img src="images/Taenk-Trygt.png" alt="Logo">
+            </div>
+            
+            <nav class="pro-nav">
+                <div class="pro-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="pro-nav-menu">
+                    <li><a href="index.html" class="pro-nav-link">Forside</a></li>
+                    <li><a href="video.html" class="pro-nav-link active">Video</a></li>
+                    <li><a href="quiz.html" class="pro-nav-link">Quiz</a></li>
+                    <li><a href="om-os.html" class="pro-nav-link">Hvem er vi?</a></li>
+                 
+                    <!-- Theme toggle button -->
+                    <li>
+                        <button id="theme-toggle" class="theme-toggle" aria-label="Skift til mørk tilstand" title="Skift til mørk tilstand">
+                            <i class="fas fa-moon moon-icon"></i>
+                            <i class="fas fa-sun sun-icon" style="display: none;"></i>
+                        </button>
+                    </li>
+                    <li class="pro-highlight"><a id="auth-button" class="pro-btn-small">Opret konto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="page-hero video-hero" data-aos="fade-down" data-aos-duration="1000">
+            <div class="hero-content">
+                <div class="container">
+                    <h1 data-aos="fade-up" data-aos-delay="200">Vores video om angst</h1>
+                    <p data-aos="fade-up" data-aos-delay="400">Lær mere om angst gennem vores informative video</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-main" data-aos="fade-up" data-aos-duration="1000">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Se vores video</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="video-container" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="video-placeholder">
+                        <img src="https://static.vecteezy.com/system/resources/thumbnails/023/818/982/small_2x/golden-cinematic-coming-soon-title-animation-free-video.jpg" alt="Video thumbnail" class="responsive-image">
+                        <div class="coming-soon-overlay">
+                            <h2 data-aos="fade-up" data-aos-delay="400">Coming Soon</h2>
+                            <p data-aos="fade-up" data-aos-delay="600">Vores video er under produktion og kommer snart!</p>
+                            <div class="play-button" data-aos="zoom-in" data-aos-delay="800">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="video-description" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Om videoen</h3>
+                    <p>I denne video vil vi vise, at "nobody gives a flying living diddly fuck" ved at to gruppemedlemmer tager ud på et travlt sted iført dumme kostumer.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="video-process" data-aos="fade-up" data-aos-duration="1000">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Bag om videoen</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="process-grid">
+                    <div class="process-text" data-aos="fade-right" data-aos-delay="200">
+                        <h3>Vores proces</h3>
+                        <p>Vi har brugt tid på at researche emnet angst blandt unge. Vi har interviewet psykologer, unge med angst og deres familier for at få en dybere forståelse af emnet.</p>
+                        <p>Vores mål er at skabe en video, der både er informativ og relaterbar for unge, der kæmper med angst i deres hverdag.</p>
+                        <p>Vi vil vise, at angst er en naturlig følelse, men at den kan blive et problem, når den begynder at begrænse dig i din hverdag. Vi vil også give konkrete råd til, hvordan du kan håndtere angst.</p>
+                    </div>
+                    <div class="process-image" data-aos="fade-left" data-aos-delay="400">
+                        <img src="images/Taenk-Trygt.png" alt="Bag kulisserne">
+                    </div>
+                </div>
+                
+                <div class="process-gallery" data-aos="fade-up" data-aos-delay="300">
+                    <h3>Billeder fra processen</h3>
+                    
+                    <!-- Interactive Carousel -->
+                    <div class="carousel-container" data-aos="zoom-in" data-aos-delay="500">
+                        <div class="carousel-slides">
+                            <div class="carousel-slide active">
+                                <img src="https://as1.ftcdn.net/jpg/05/34/79/62/1000_F_534796205_MfjD9k8Hu3xe2QYW8tNDuwH1R1vHrWUS.jpg" alt="Proces billede 1">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ94CSYqrSpO1mAy-NmKqVM_CIzDu7K4odCZA&s" alt="Proces billede 2">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAw_FKCn5tL0YIX7TbZVFayyta7HZ3vpIsRw&s" alt="Proces billede 3">
+                            </div>
+                            <div class="carousel-slide">
+                                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRAw_FKCn5tL0YIX7TbZVFayyta7HZ3vpIsRw&s" alt="Proces billede 4">
+                            </div>
+                        </div>
+                        
+                        <button class="carousel-btn prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="carousel-btn next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                        
+                        <div class="carousel-indicators">
+                            <div class="carousel-indicator active" data-index="0"></div>
+                            <div class="carousel-indicator" data-index="1"></div>
+                            <div class="carousel-indicator" data-index="2"></div>
+                            <div class="carousel-indicator" data-index="3"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta" data-aos="fade-up" data-aos-duration="1000">
+            <div class="container">
+                <div class="section-header" data-aos="fade-up">
+                    <h2>Vil du vide mere?</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="cta-grid">
+                    <div class="cta-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="cta-icon">
+                            <i class="fas fa-home"></i>
+                        </div>
+                        <h3>Gå til forsiden</h3>
+                        <p>Find mere information om angst på vores forside</p>
+                        <a href="index.html" class="btn">Til forsiden</a>
+                    </div>
+                    <div class="cta-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="cta-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Tag en quiz</h3>
+                        <p>Find ud af mere om angst gennem vores quizzer</p>
+                        <a href="quiz.html" class="btn">Tag quiz</a>
+                    </div>
+                    <div class="cta-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="cta-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Hvem er vi?</h3>
+                        <p>Lær mere om vores projekt og hvem vi er</p>
+                        <a href="om-os.html" class="btn">Læs mere</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Auth Modal with fixed text color and improved Google sign-in -->
+    <div id="auth-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:30px; border-radius:10px; box-shadow:0 8px 16px rgba(0,0,0,0.3); z-index:1000; max-width:400px; width:90%;">
+        <div id="auth-tabs" style="display:flex; margin-bottom:20px; border-bottom:1px solid #ddd;">
+            <button id="login-tab" class="auth-tab active" style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid #007BFF; font-weight:bold; cursor:pointer;">Log Ind</button>
+            <button id="signup-tab" class="auth-tab" style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer;">Opret Konto</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="login-form" style="display:block;">
+            <div style="margin-bottom:15px;">
+                <label for="login-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+                <input type="email" id="login-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="margin-bottom:15px;">
+                <label for="login-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+                <input type="password" id="login-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Log Ind</button>
+                <button type="button" onclick="closeAuthModal()" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+            </div>
+            <div style="margin-top:15px; text-align:center;">
+                <a href="#" id="forgot-password" style="color:#007BFF; text-decoration:none; font-size:14px;">Glemt adgangskode?</a>
+            </div>
+        </form>
+        
+        <!-- Signup Form -->
+        <form id="signup-form" style="display:none;">
+            <div style="margin-bottom:15px;">
+                <label for="signup-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+                <input type="email" id="signup-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="margin-bottom:15px;">
+                <label for="signup-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+                <input type="password" id="signup-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="margin-bottom:15px;">
+                <label for="signup-confirm-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Bekræft adgangskode:</label>
+                <input type="password" id="signup-confirm-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Opret Konto</button>
+                <button type="button" onclick="closeAuthModal()" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+            </div>
+        </form>
+        
+        <!-- Reset Password Form -->
+        <form id="reset-form" style="display:none;">
+            <div style="margin-bottom:15px;">
+                <label for="reset-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+                <input type="email" id="reset-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Nulstil Adgangskode</button>
+                <button type="button" id="back-to-login" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Tilbage</button>
+            </div>
+        </form>
+        
+        <div id="auth-message" style="margin-top:15px; text-align:center; display:none;"></div>
+        
+        <div style="margin-top:20px; text-align:center;">
+            <p style="margin-bottom:10px; font-weight:bold; color:#333;">Opret Konto eller log ind</p>
+            <button id="google-signin" style="width:100%; padding:10px; margin-top:10px; background:#fff; color:#333; border:1px solid #ddd; border-radius:5px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:500; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" style="width:18px; height:18px; margin-right:10px;">
+                Log ind med Google
+            </button>
+        </div>
+    </div>
+
+    <style>
+    /* Popup Styling */
+    #game-popup {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 100%;
+        max-width: 800px;
+        padding: 2rem;
+        background: rgba(0, 0, 0, 0.85);
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        z-index: 1000;
+    }
+
+    #game-popup .cs-container {
+        position: relative;
+        z-index: 2;
+    }
+
+    #game-popup .cs-title {
+        font-size: 2rem;
+        font-weight: bold;
+        margin-bottom: 1rem;
+    }
+
+    #game-popup .cs-description {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    #game-popup .cs-link {
+        font-size: 1.25rem;
+        line-height: 1.2em;
+        text-transform: uppercase;
+        text-decoration: none;
+        font-weight: 700;
+        color: white;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        background: #007BFF;
+        padding: 0.75rem 1.5rem;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+    #game-popup .cs-link:hover {
+        background: #0056b3;
+    }
+
+    #game-popup .cs-wrapper {
+        width: 3rem;
+        height: 3rem;
+        background-color: white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #game-popup .cs-icon {
+        width: 1.5rem;
+        height: auto;
+    }
+
+    #game-popup .cs-close-button {
+        margin-top: 1.5rem;
+        padding: 0.5rem 1rem;
+        background: #FF4D4D;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: background 0.3s;
+    }
+
+    #game-popup .cs-close-button:hover {
+        background: #cc0000;
+    }
+
+    #game-popup .cs-background {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    #game-popup .cs-background img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    #popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+    }
+        
+    /* Auth Modal Styling */
+    .auth-tab.active {
+        border-bottom-color: #007BFF !important;
+        color: #007BFF;
+    }
+
+    #auth-message {
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #auth-message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    #auth-message.success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+    </style>
+
+    <script>
+    // Initialize AOS (Animate On Scroll)
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+        
+        // Carousel functionality
+        const slides = document.querySelectorAll('.carousel-slide');
+        const indicators = document.querySelectorAll('.carousel-indicator');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const nextBtn = document.querySelector('.carousel-btn.next');
+        let currentSlide = 0;
+        let slideInterval;
+
+        // Function to go to a specific slide
+        function goToSlide(n) {
+            slides.forEach((slide, idx) => {
+                slide.classList.toggle('active', idx === n);
+            });
+            indicators.forEach((indicator, idx) => {
+                indicator.classList.toggle('active', idx === n);
+            });
+            currentSlide = n;
+        }
+
+        // Function to start automatic slideshow
+        function startSlideshow() {
+            slideInterval = setInterval(() => {
+                goToSlide((currentSlide + 1) % slides.length);
+            }, 4000);
+        }
+
+        // Function to reset the slideshow timer
+        function resetSlideshow() {
+            clearInterval(slideInterval);
+            startSlideshow();
+        }
+
+        // Event listeners for prev/next buttons
+        prevBtn.addEventListener('click', () => {
+            goToSlide((currentSlide - 1 + slides.length) % slides.length);
+            resetSlideshow();
+        });
+
+        nextBtn.addEventListener('click', () => {
+            goToSlide((currentSlide + 1) % slides.length);
+            resetSlideshow();
+        });
+
+        // Event listeners for indicators
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                goToSlide(index);
+                resetSlideshow();
+            });
+        });
+
+        // Init first slide
+        goToSlide(0);
+        startSlideshow();
+
+        // Show popup after 10 seconds
+        setTimeout(() => {
+            const popup = document.getElementById('game-popup');
+            const overlay = document.getElementById('popup-overlay');
+            if (popup && overlay) {
+                popup.style.display = 'block';
+                overlay.style.display = 'block';
+            }
+        }, 10000);
+    });
+
+    // Close popup function
+    function closeGamePopup() {
+        const popup = document.getElementById('game-popup');
+        const overlay = document.getElementById('popup-overlay');
+        if (popup && overlay) {
+            popup.style.display = 'none';
+            overlay.style.display = 'none';
+        }
+    }
+
+    // Initialize Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyAl2HDC3-4dkrZtf2ho6Bf2jsRfMY7EdQc",
+        authDomain: "kritiskklik.firebaseapp.com",
+        projectId: "kritiskklik",
+        storageBucket: "kritiskklik.firebasestorage.app",
+        messagingSenderId: "792072906036",
+        appId: "1:792072906036:web:8ccccdb11ca493d465f161"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // Auth Modal Functions
+    document.getElementById('auth-button').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('auth-modal').style.display = 'block';
+        document.getElementById('modal-overlay').style.display = 'block';
+    });
+
+    function closeAuthModal() {
+        document.getElementById('auth-modal').style.display = 'none';
+        document.getElementById('modal-overlay').style.display = 'none';
+    }
+
+    // Tab switching
+    document.getElementById('login-tab').addEventListener('click', function() {
+        document.getElementById('login-form').style.display = 'block';
+        document.getElementById('signup-form').style.display = 'none';
+        document.getElementById('reset-form').style.display = 'none';
+        document.getElementById('login-tab').classList.add('active');
+        document.getElementById('signup-tab').classList.remove('active');
+        hideAuthMessage();
+    });
+
+    document.getElementById('signup-tab').addEventListener('click', function() {
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('signup-form').style.display = 'block';
+        document.getElementById('reset-form').style.display = 'none';
+        document.getElementById('login-tab').classList.remove('active');
+        document.getElementById('signup-tab').classList.add('active');
+        hideAuthMessage();
+    });
+
+    document.getElementById('forgot-password').addEventListener('click', function(e) {
+        e.preventDefault();
+        document.getElementById('login-form').style.display = 'none';
+        document.getElementById('signup-form').style.display = 'none';
+        document.getElementById('reset-form').style.display = 'block';
+        hideAuthMessage();
+    });
+
+    document.getElementById('back-to-login').addEventListener('click', function() {
+        document.getElementById('login-form').style.display = 'block';
+        document.getElementById('signup-form').style.display = 'none';
+        document.getElementById('reset-form').style.display = 'none';
+        hideAuthMessage();
+    });
+
+    // Handle login form submission
+    document.getElementById('login-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('login-email').value;
+        const password = document.getElementById('login-password').value;
+        
+        auth.signInWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                showAuthMessage('Du er nu logget ind!', false);
+                setTimeout(() => {
+                    closeAuthModal();
+                    updateAuthButton();
+                }, 1500);
+            })
+            .catch((error) => {
+                let errorMessage = 'Der opstod en fejl ved login';
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    errorMessage = 'Forkert email eller adgangskode';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Ugyldig email-adresse';
+                }
+                showAuthMessage(errorMessage);
+            });
+    });
+
+    // Handle signup form submission
+    document.getElementById('signup-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('signup-email').value;
+        const password = document.getElementById('signup-password').value;
+        const confirmPassword = document.getElementById('signup-confirm-password').value;
+        
+        if (password !== confirmPassword) {
+            showAuthMessage('Adgangskoderne matcher ikke');
+            return;
+        }
+        
+        auth.createUserWithEmailAndPassword(email, password)
+            .then((userCredential) => {
+                showAuthMessage('Konto oprettet! Du er nu logget ind.', false);
+                setTimeout(() => {
+                    closeAuthModal();
+                    updateAuthButton();
+                }, 1500);
+            })
+            .catch((error) => {
+                let errorMessage = 'Der opstod en fejl ved oprettelse af konto';
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'Denne email er allerede i brug';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Ugyldig email-adresse';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Adgangskoden er for svag';
+                }
+                showAuthMessage(errorMessage);
+            });
+    });
+
+    // Handle reset password form submission
+    document.getElementById('reset-form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('reset-email').value;
+        
+        auth.sendPasswordResetEmail(email)
+            .then(() => {
+                showAuthMessage('Instruktioner til nulstilling af adgangskode er sendt til din email.', false);
+                setTimeout(() => {
+                    document.getElementById('login-tab').click();
+                }, 3000);
+            })
+            .catch((error) => {
+                let errorMessage = 'Der opstod en fejl ved anmodning om nulstilling af adgangskode';
+                if (error.code === 'auth/user-not-found') {
+                    errorMessage = 'Ingen bruger fundet med denne email';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Ugyldig email-adresse';
+                }
+                showAuthMessage(errorMessage);
+            });
+    });
+
+    function showAuthMessage(message, isError = true) {
+        const messageElement = document.getElementById('auth-message');
+        messageElement.textContent = message;
+        messageElement.style.display = 'block';
+        
+        if (isError) {
+            messageElement.classList.add('error');
+            messageElement.classList.remove('success');
+        } else {
+            messageElement.classList.add('success');
+            messageElement.classList.remove('error');
+        }
+    }
+
+    function hideAuthMessage() {
+        document.getElementById('auth-message').style.display = 'none';
+    }
+
+    // Update auth button based on authentication state
+    function updateAuthButton() {
+        const authButton = document.getElementById('auth-button');
+        const currentUser = auth.currentUser;
+        
+        if (currentUser) {
+            authButton.textContent = 'Log Ud';
+            authButton.onclick = function(e) {
+                e.preventDefault();
+                auth.signOut().then(() => {
+                    updateAuthButton();
+                });
+            };
+        } else {
+            authButton.textContent = 'Opret Konto';
+            authButton.onclick = function(e) {
+                e.preventDefault();
+                document.getElementById('auth-modal').style.display = 'block';
+                document.getElementById('popup-overlay').style.display = 'block';
+            };
+        }
+    }
+
+    // Check auth state on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        auth.onAuthStateChanged(function(user) {
+            updateAuthButton();
+        });
+        
+        // Professional Navigation Bar Script
+        const menuToggle = document.querySelector(".pro-menu-toggle");
+        const navMenu = document.querySelector(".pro-nav-menu");
+        const body = document.body;
+        
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", function() {
+                navMenu.classList.toggle("active");
+                
+                // Prevent body scrolling when menu is open
+                if (navMenu.classList.contains("active")) {
+                    body.style.overflow = "hidden";
+                } else {
+                    body.style.overflow = "";
+                }
+            });
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener("click", function(e) {
+            if (
+                navMenu && 
+                navMenu.classList.contains("active") && 
+                !e.target.closest(".pro-nav") && 
+                !e.target.closest(".pro-menu-toggle")
+            ) {
+                navMenu.classList.remove("active");
+                body.style.overflow = "";
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener("click", function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute("href");
+                if (targetId === "#") return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // Close mobile menu if open
+                    if (navMenu && navMenu.classList.contains("active")) {
+                        navMenu.classList.remove("active");
+                        body.style.overflow = "";
+                    }
+                    
+                    // Smooth scroll to target
+                    targetElement.scrollIntoView({
+                        behavior: "smooth",
+                        block: "start"
+                    });
+                }
+            });
+        });
+    });
+    </script>
+
+    <style>
+        /* Add hover effects for buttons */
+        .button.primary:hover {
+            background: #333; /* Darker shade for hover effect */
+        }
+
+        .button:hover {
+            background: #e2e6ea;
+            color: #000;
+        }
+
+        .cs-button-6 {
+            text-align: center;
+            font-size: 1rem;
+            line-height: clamp(2.875rem, 8vw, 3.5rem);
+            text-decoration: none;
+            font-weight: 700;
+            min-width: 10.875rem;
+            margin: auto;
+            color: #fff; /* Change text color to white */
+            padding: 0 1.5rem;
+            box-sizing: border-box;
+            background-color: #000; /* Change background to black */
+            border: 2px solid #000; /* Match border color to black */
+            display: inline-flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s, background-color 0.3s;
+        }
+        .cs-button-6:before {
+            content: "";
+            width: 0.375rem;
+            height: 100%;
+            background: #fff; /* Change hover effect to white */
+            opacity: 1;
+            position: absolute;
+            display: block;
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s;
+            z-index: -1;
+        }
+        .cs-button-6 .cs-icon path {
+            transition: fill 0.3s;
+            fill: #fff; /* Change icon color to white */
+        }
+        .cs-button-6:hover {
+            color: #000; /* Change text color to black on hover */
+            background-color: #fff; /* Change background to white on hover */
+        }
+        .cs-button-6:hover:before {
+            width: 100%;
+        }
+        .cs-button-6:hover .cs-icon path {
+            fill: #000; /* Change icon color to black on hover */
+        }
+    </style>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="images/Taenk-Trygt.png" alt="Logo">
+                    </div>
+                      <!-- Search Bar Component -->
+                    <div class="search-container">
+                      <div class="search-wrapper">
+                        <input type="text" id="site-search" class="search-input" placeholder="Søg på siden..." aria-label="Søg på siden">
+                        <button type="button" id="search-button" class="search-button">
+                          <!-- Removed the search icon -->
+                        </button>
+                      </div>
+                      <div id="search-results" class="search-results" style="display: none;">
+                        <!-- Search results will appear here -->
+                      </div>
+                    </div>
+
+                    <style>
+                    /* Search Bar Styles */
+                    .search-container {
+                      position: relative;
+                      margin-right: 15px;
+                    }
+
+                    .search-wrapper {
+                      display: flex;
+                      align-items: center;
+                      position: relative;
+                    }
+
+                    .search-input {
+                      padding: 8px 12px;
+                      padding-right: 40px;
+                      border: 1px solid var(--gray-300, #e2e8f0);
+                      border-radius: 6px;
+                      font-family: "Poppins", sans-serif;
+                      font-size: 0.9rem;
+                      width: 200px;
+                      transition: all 0.3s ease;
+                      background-color: var(--background-color, #fff);
+                      color: var(--text-color, #2d3748);
+                    }
+
+                    .search-input:focus {
+                      outline: none;
+                      border-color: var(--primary-color, #3a6ea5);
+                      box-shadow: 0 0 0 2px rgba(58, 110, 165, 0.2);
+                      width: 250px;
+                    }
+
+                    .search-button {
+                      position: absolute;
+                      right: 10px;
+                      background: transparent;
+                      border: none;
+                      cursor: pointer;
+                      color: var(--gray-500, #a0aec0);
+                      transition: color 0.3s ease;
+                    }
+
+                    .search-button:hover {
+                      color: var(--primary-color, #3a6ea5);
+                    }
+
+                    .search-results {
+                      position: absolute;
+                      top: 100%;
+                      left: 0;
+                      width: 100%;
+                      background-color: var(--background-color, #fff);
+                      border: 1px solid var(--gray-300, #e2e8f0);
+                      border-radius: 6px;
+                      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                      margin-top: 5px;
+                      z-index: 1000;
+                      max-height: 300px;
+                      overflow-y: auto;
+                    }
+
+                    .search-result-item {
+                      padding: 10px 15px;
+                      border-bottom: 1px solid var(--gray-200, #edf2f7);
+                      cursor: pointer;
+                      transition: background-color 0.3s ease;
+                    }
+
+                    .search-result-item:last-child {
+                      border-bottom: none;
+                    }
+
+                    .search-result-item:hover {
+                      background-color: var(--gray-100, #f7fafc);
+                    }
+
+                    .search-result-title {
+                      font-weight: 600;
+                      color: var(--text-color, #2d3748);
+                      margin-bottom: 3px;
+                    }
+
+                    .search-result-description {
+                      font-size: 0.85rem;
+                      color: var(--gray-600, #718096);
+                    }
+
+                    .search-highlight {
+                      background-color: rgba(58, 110, 165, 0.2);
+                      padding: 0 2px;
+                    }
+
+                    /* Responsive styles */
+                    @media (max-width: 768px) {
+                      .search-container {
+                        width: 100%;
+                        margin: 0.5rem 0;
+                      }
+                      
+                      .search-input {
+                        width: 100%;
+                      }
+                      
+                      .search-input:focus {
+                        width: 100%;
+                      }
+                    }
+                    </style>
+
+                    <script>
+                    // Search functionality
+                    document.addEventListener('DOMContentLoaded', function() {
+                      const searchInput = document.getElementById('site-search');
+                      const searchButton = document.getElementById('search-button');
+                      const searchResults = document.getElementById('search-results');
+                      
+                      // Sample content to search through - you'll need to replace this with your actual content
+                      const siteContent = [
+                        { title: 'Forside', url: 'index.html', content: 'Angst er en naturlig følelse, der skal beskytte dig mod fare. Men når angsten begynder at begrænse dig i din hverdag, kan du gøre noget ved det.' },
+                        { title: 'Video', url: 'video.html', content: 'Lær mere om angst gennem vores informative video. Vores video er under produktion og kommer snart!' },
+                        { title: 'Quiz', url: 'quiz.html', content: 'Test din viden om angst eller find ud af, hvilken type angst du muligvis oplever.' },
+                        { title: 'Hvem er vi?', url: 'om-os.html', content: 'Lær mere om vores team og projektet bag hjemmesiden om angst blandt unge.' },
+                        { title: 'Generaliseret angst', url: 'index.html#generaliseret', content: 'Angst for flere forskellige ting og situationer. Der er en konstant nervøsitet og anspændthed eller væren på vagt.' },
+                        { title: 'Panikangst', url: 'index.html#panik', content: 'Opleves som voldsom hjertebanken, svimmelhed, uvirkelighedsfølelse og angst for at blive sindssyg eller at dø.' },
+                        { title: 'Social angst', url: 'index.html#social', content: 'Kendetegnet ved ubehag i sociale situationer. Den unge er bange for at gøre noget pinligt, være utilstrækkelig eller at blive grinet ad.' }
+                      ];
+                      
+                      function performSearch() {
+                        const query = searchInput.value.trim().toLowerCase();
+                        
+                        if (query.length < 2) {
+                          searchResults.style.display = 'none';
+                          return;
+                        }
+                        
+                        const results = siteContent.filter(item => 
+                          item.title.toLowerCase().includes(query) || 
+                          item.content.toLowerCase().includes(query)
+                        );
+                        
+                        if (results.length > 0) {
+                          displayResults(results, query);
+                        } else {
+                          searchResults.innerHTML = '<div class="search-result-item">Ingen resultater fundet</div>';
+                          searchResults.style.display = 'block';
+                        }
+                      }
+                      
+                      function displayResults(results, query) {
+                        searchResults.innerHTML = '';
+                        
+                        results.forEach(result => {
+                          const resultItem = document.createElement('div');
+                          resultItem.className = 'search-result-item';
+                          
+                          // Highlight matching text
+                          const titleHighlighted = highlightText(result.title, query);
+                          const contentHighlighted = highlightText(result.content, query);
+                          
+                          resultItem.innerHTML = `
+                            <div class="search-result-title">${titleHighlighted}</div>
+                            <div class="search-result-description">${contentHighlighted.substring(0, 100)}${result.content.length > 100 ? '...' : ''}</div>
+                          `;
+                          
+                          resultItem.addEventListener('click', function() {
+                            window.location.href = result.url;
+                          });
+                          
+                          searchResults.appendChild(resultItem);
+                        });
+                        
+                        searchResults.style.display = 'block';
+                      }
+                      
+                      function highlightText(text, query) {
+                        const regex = new RegExp(`(${query})`, 'gi');
+                        return text.replace(regex, '<span class="search-highlight">$1</span>');
+                      }
+                      
+                      // Event listeners
+                      searchInput.addEventListener('input', performSearch);
+                      
+                      searchButton.addEventListener('click', performSearch);
+                      
+                      // Close search results when clicking outside
+                      document.addEventListener('click', function(e) {
+                        if (!searchInput.contains(e.target) && !searchButton.contains(e.target) && !searchResults.contains(e.target)) {
+                          searchResults.style.display = 'none';
+                        }
+                      });
+                      
+                      // Close search results when pressing Escape
+                      document.addEventListener('keydown', function(e) {
+                        if (e.key === 'Escape') {
+                          searchResults.style.display = 'none';
+                        }
+                      });
+                    });
+                    </script>
+                    
+                
+                </div>
+                <div class="footer-links">
+                    <h4>Sider</h4>
+                    <ul>
+                        <li><a href="index.html">Forside</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="quiz.html">Quiz</a></li>
+                        <li><a href="om-os.html">Hvem er vi?</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> kontakt@angstblandtunge.dk</li>
+                        <li><i class="fas fa-phone"></i> +45 12 34 56 78</li>
+                        <li><i class="fas fa-map-marker-alt"></i> København, Danmark</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Angst blandt unge. Alle rettigheder forbeholdes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+  
+<style>
+  #ai-chatbot-popup {
+    animation: chatbot-fadein 0.25s;
+  }
+  @keyframes chatbot-fadein {
+    from { opacity:0; transform:translateY(30px);}
+    to { opacity:1; transform:translateY(0);}
+  }
+  #ai-chatbot-open:hover {
+    background: #205080;
+  }
+  @media (max-width: 600px) {
+    #ai-chatbot-popup {
+      left: 5vw !important;
+      max-width: 98vw !important;
+    }
+    #ai-chatbot-open {
+      left: 5vw !important;
+      padding: 12px 14px;
+      font-size: 0.95rem;
+    }
+  }
+</style>
+<script>
+  // AI Chatbot popup logic
+  document.getElementById('ai-chatbot-open').onclick = function() {
+    document.getElementById('ai-chatbot-popup').style.display = 'block';
+    this.style.display = 'none';
+  };
+  document.getElementById('ai-chatbot-close').onclick = function() {
+    document.getElementById('ai-chatbot-popup').style.display = 'none';
+    document.getElementById('ai-chatbot-open').style.display = 'flex';
+  };
+</script>
+<!-- AI Psykolog Chatbot Popup -->
+    <div id="ai-chatbot-popup" style="display:none; position:fixed; bottom:90px; left:30px; z-index:3000; box-shadow:0 4px 24px rgba(0,0,0,0.25); border-radius:12px; background:#fff; max-width:370px; width:90vw;">
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#153a5b; color:#fff; padding:10px 16px; border-radius:12px 12px 0 0;">
+        <span style="font-weight:600;">Chat med din AI psykolog</span>
+        <button id="ai-chatbot-close" style="background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer;">&times;</button>
+      </div>
+      <div style="width:100%; height:420px; overflow:hidden; border-radius:0 0 12px 12px; position:relative;">
+        <div style="width:100%; height:420px; overflow:hidden; border-radius:0 0 12px 12px; position:relative;">
+          <iframe 
+            src="https://psykologbot.vercel.app/" 
+            width="100%" 
+            height="470" 
+            style="border:none; position:relative; top:-50px;"
+            title="AI Psykolog Bot"
+            allow="camera; microphone"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <button id="ai-chatbot-open" aria-label="Chat med din AI psykolog" style="position:fixed; bottom:30px; left:30px; z-index:3001; background:#153a5b; color:#fff; border:none; border-radius:50px; box-shadow:0 2px 8px rgba(0,0,0,0.18); padding:14px 22px; font-size:1rem; font-weight:600; display:flex; align-items:center; gap:10px; cursor:pointer; transition:background 0.2s;">
+      <i class="fas fa-comments" style="font-size:1.2rem;"></i>
+      Chat med din AI psykolog
+    </button>
+
+    <!-- Page Transition Overlay -->
+    <div id="page-transition-overlay" class="active"></div>
+    <style>
+    #page-transition-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #153a5b;
+        z-index: 2000;
+        pointer-events: all;
+        transform: translateX(0);
+        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+    }
+    #page-transition-overlay.hide {
+        transform: translateX(-100%);
+        pointer-events: none;
+    }
+    </style>
+    <script>
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            const overlay = document.getElementById('page-transition-overlay');
+            if (overlay) {
+                overlay.classList.add('hide');
+                overlay.classList.remove('active');
+            }
+        }, 80);
+    });
+    </script>
+</body>
+</html>

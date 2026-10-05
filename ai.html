@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<link rel="icon" href="https://www.angst.dk/wp-content/uploads/logo-trans-512x512-1.png">
+<html lang="da">
+<head>
+    
+  
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angst blandt unge | Quiz</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <!-- Firebase Authentication -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+      <!-- Add these lines to the <head> section of each HTML file -->
+<link rel="stylesheet" href="theme-styles.css">
+<script src="theme-toogle.js" defer></script>
+
+  <style>
+    /* Professional Navigation Bar Styles */
+    .pro-header {
+      background-color: var(--background-color, #fff);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .pro-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pro-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .pro-logo img {
+      height: 45px;
+      transition: transform 0.3s ease;
+    }
+
+    .pro-logo img:hover {
+      transform: scale(1.05);
+    }
+
+    .pro-nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pro-nav-menu li {
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pro-nav-link {
+      display: block;
+      padding: 0.7rem 1rem;
+      color: var(--text-color, #2d3748);
+      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .pro-nav-link:hover {
+      color: var(--primary-color, #3a6ea5);
+      background-color: rgba(58, 110, 165, 0.08);
+    }
+
+    .pro-nav-link.active {
+      color: var(--primary-color, #3a6ea5);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .pro-nav-link.active::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background-color: var(--primary-color, #3a6ea5);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .pro-nav-link.active:hover::after {
+      width: 80%;
+    }
+
+    /* --- ADD THIS FOR HOVER UNDERLINE ON ALL NAV LINKS --- */
+    .pro-nav-link:not(.active):hover::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background-color: var(--primary-color, #3a6ea5);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .pro-nav-link:not(.active):hover::after {
+      width: 80%;
+    }
+
+    .pro-highlight .pro-btn-small {
+      background-color: var(--primary-color, #3a6ea5);
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(58, 110, 165, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .pro-highlight .pro-btn-small:hover {
+      background-color: var(--primary-dark, #2c5282);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(58, 110, 165, 0.4);
+    }
+
+    .pro-highlight .pro-btn-small:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 3px rgba(58, 110, 165, 0.3);
+    }
+
+    /* Theme toggle button styling */
+    .theme-toggle {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: transparent;
+      border: 2px solid var(--gray-300, #e2e8f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary-color, #3a6ea5);
+      background-color: rgba(58, 110, 165, 0.08);
+    }
+
+    .theme-toggle i {
+      font-size: 18px;
+      color: var(--text-color, #2d3748);
+      transition: color 0.3s ease;
+    }
+
+    .theme-toggle:hover i {
+      color: var(--primary-color, #3a6ea5);
+    }
+
+    /* Mobile menu toggle */
+    .pro-menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color, #2d3748);
+      background: transparent;
+      border: none;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .pro-menu-toggle:hover {
+      color: var(--primary-color, #3a6ea5);
+    }
+
+    /* Responsive styles */
+    @media (max-width: 992px) {
+      .pro-nav-menu {
+        gap: 0.2rem;
+      }
+
+      .pro-nav-link {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pro-menu-toggle {
+        display: block;
+      }
+
+      .pro-nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--background-color, #fff);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 2rem 0;
+        transition: left 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 99;
+        gap: 1rem;
+      }
+
+      .pro-nav-menu.active {
+        left: 0;
+      }
+
+      .pro-nav-menu li {
+        width: 80%;
+        text-align: center;
+      }
+
+      .pro-nav-link {
+        padding: 1rem;
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .pro-nav-link.active::after {
+        bottom: 5px;
+        width: 30%;
+      }
+
+      .pro-highlight {
+        margin-top: 1rem;
+        width: 80%;
+      }
+
+      .pro-highlight .pro-btn-small {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      /* Adjust theme toggle in mobile view */
+      .pro-nav-menu .theme-toggle {
+        margin: 1rem 0;
+      }
+    }
+
+    /* Chat-specifikke styles */
+    .chat-container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      position: relative;
+    }
+
+    .chat-header {
+      background-color: var(--primary-color);
+      color: #fff;
+      padding: 15px 20px;
+      display: flex;
+      align-items: center;
+    }
+
+    .chat-header .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+    }
+
+    .chat-header .avatar i {
+      color: var(--primary-color);
+      font-size: 20px;
+    }
+
+    .chat-header .info h2 {
+      margin: 0;
+      font-size: 18px;
+      color: #fff;
+    }
+
+    .chat-header .info p {
+      margin: 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    /* Add a sound toggle button in the chat header, right after the info div */
+
+    /* Add this CSS after the chat-header styles: */
+    .sound-toggle {
+      margin-left: auto;
+    }
+
+    .sound-toggle button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .sound-toggle button:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .sound-toggle button.muted i.fa-volume-up {
+      display: none;
+    }
+
+    .sound-toggle button:not(.muted) i.fa-volume-mute {
+      display: none;
+    }
+
+    .chat-messages {
+      padding: 20px;
+      height: 400px;
+      overflow-y: auto;
+    }
+
+    .message {
+      margin-bottom: 15px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .message-content {
+      max-width: 80%;
+      padding: 12px 15px;
+      border-radius: 18px;
+      position: relative;
+      word-wrap: break-word;
+    }
+
+    .bot-message .message-content {
+      background-color: #f0f0f0;
+      color: #333;
+      border-top-left-radius: 5px;
+      align-self: flex-start;
+    }
+
+    .user-message {
+      align-items: flex-end;
+    }
+
+    .user-message .message-content {
+      background-color: var(--primary-color);
+      color: #fff;
+      border-top-right-radius: 5px;
+    }
+
+    .message-time {
+      font-size: 12px;
+      color: #999;
+      margin-top: 5px;
+    }
+
+    .chat-input {
+      display: flex;
+      padding: 15px;
+      background-color: #f9f9f9;
+      border-top: 1px solid #eee;
+    }
+
+    .chat-input input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 25px;
+      outline: none;
+      font-size: 14px;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .chat-input button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      width: 45px;
+      height: 45px;
+      margin-left: 10px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.3s;
+    }
+
+    .chat-input button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .chat-input button i {
+      font-size: 18px;
+    }
+
+    /* Initial form styles */
+    .initial-form {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 30px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .initial-form h2 {
+      margin-bottom: 20px;
+      color: var(--primary-color);
+      text-align: center;
+    }
+
+    .initial-form p {
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 15px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      min-height: 120px;
+      font-family: 'Montserrat', sans-serif;
+      resize: vertical;
+    }
+
+    .form-submit {
+      text-align: center;
+    }
+
+    /* Typing indicator */
+    .typing-indicator {
+      display: flex;
+      padding: 12px 15px;
+      background-color: #f0f0f0;
+      border-radius: 18px;
+      border-top-left-radius: 5px;
+      width: fit-content;
+      margin-bottom: 15px;
+      align-self: flex-start;
+    }
+
+    .typing-indicator span {
+      height: 8px;
+      width: 8px;
+      background-color: #999;
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 2px;
+      animation: typing 1.4s infinite ease-in-out;
+    }
+
+    .typing-indicator span:nth-child(1) {
+      animation-delay: 0s;
+    }
+
+    .typing-indicator span:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+      animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+      0% {
+        transform: translateY(0px);
+      }
+
+      50% {
+        transform: translateY(-5px);
+      }
+
+      100% {
+        transform: translateY(0px);
+      }
+    }
+
+    /* Login Required Overlay */
+    #login-required-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      z-index: 1001;
+      display: none;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .login-required-content {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      max-width: 500px;
+      width: 90%;
+      text-align: center;
+    }
+
+    .login-required-content h2 {
+      margin-bottom: 20px;
+      color: #333;
+    }
+
+    .login-required-content p {
+      margin-bottom: 25px;
+      color: #666;
+    }
+
+    .login-required-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .login-required-login {
+      padding: 12px 25px;
+      background: var(--primary-color);
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .login-required-cancel {
+      padding: 12px 25px;
+      background: #f5f5f5;
+      color: #333;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    /* Animated Psychologist Character */
+    .psychologist-container {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      width: 120px;
+      height: 120px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .psychologist {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .psychologist-head {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: -40%;
+      /* Move the head slightly upward */
+      background: url('images/psychologist-head.png') no-repeat center center;
+      background-size: contain;
+    }
+
+    .psychologist-eyes {
+      position: absolute;
+      width: 50%;
+      height: 20%;
+      top: 0.01%;
+      /* Adjust eyes to maintain relative position */
+      left: 10%;
+      background: url('images/psychologist-eyes.png') no-repeat center center;
+      background-size: contain;
+    }
+
+    .psychologist-mouth {
+      position: absolute;
+      width: 40%;
+      height: 15%;
+      top: 30%;
+      /* Adjust mouth to maintain relative position */
+      left: 22.5%;
+      background: url('images/psychologist-mouth-closed.png') no-repeat center center;
+      background-size: contain;
+      transition: background-image 0.1s ease;
+    }
+
+    .psychologist-mouth.talking {
+      animation: talk 0.3s infinite alternate;
+    }
+
+    @keyframes talk {
+      0% {
+        background-image: url('images/psychologist-mouth-closed.png');
+      }
+
+      100% {
+        background-image: url('images/psychologist-mouth-open.png');
+      }
+    }
+
+    /* Adjust chat messages to make room for the psychologist */
+    .chat-messages {
+      padding-left: 150px;
+    }
+
+    /* Diagnosis result styles */
+    .diagnosis-result {
+      background-color: #f8f9fa;
+      border-left: 4px solid var(--primary-color);
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+    }
+
+    .diagnosis-result h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .diagnosis-result p {
+      margin-bottom: 10px;
+    }
+
+    .diagnosis-result .severity {
+      font-weight: bold;
+    }
+
+    .diagnosis-result .recommendations {
+      margin-top: 15px;
+    }
+
+    .diagnosis-result .recommendations h4 {
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .diagnosis-result .recommendations ul {
+      margin-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .diagnosis-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 15px;
+    }
+
+    .diagnosis-actions button {
+      padding: 8px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+
+    .diagnosis-actions .continue-btn {
+      background-color: var(--primary-color);
+      color: white;
+    }
+
+    .diagnosis-actions .continue-btn:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .diagnosis-actions .new-assessment-btn {
+      background-color: #f1f1f1;
+      color: #333;
+    }
+
+    .diagnosis-actions .new-assessment-btn:hover {
+      background-color: #e1e1e1;
+    }
+
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      .chat-container {
+        margin: 0 15px;
+        border-radius: 0;
+      }
+
+      .chat-messages {
+        height: 350px;
+        padding-left: 20px;
+      }
+
+      .psychologist-container {
+        width: 80px;
+        height: 80px;
+        bottom: 70px;
+      }
+
+      .diagnosis-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Professional Navigation Bar -->
+  <header class="pro-header">
+    <div class="pro-container">
+      <div class="pro-logo">
+        <img src="images/Taenk-Trygt.png" alt="Logo">
+      </div>
+      
+      <nav class="pro-nav">
+        <div class="pro-menu-toggle">
+          <i class="fas fa-bars"></i>
+        </div>
+        <ul class="pro-nav-menu">
+          <li><a href="index.html" class="pro-nav-link">Forside</a></li>
+          <li><a href="video.html" class="pro-nav-link">Video</a></li>
+          <li><a href="quiz.html" class="pro-nav-link">Quiz</a></li>
+          <li><a href="om-os.html" class="pro-nav-link">Hvem er vi?</a></li>
+          <li><a href="ai.html" class="pro-nav-link active">AI Psykolog</a></li>
+          <!-- Theme toggle button -->
+          <li>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Skift til mørk tilstand"
+              title="Skift til mørk tilstand">
+              <i class="fas fa-moon moon-icon"></i>
+              <i class="fas fa-sun sun-icon" style="display: none;"></i>
+            </button>
+          </li>
+          <li class="pro-highlight"><a id="auth-button" class="pro-btn-small">Opret konto</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+   <!-- Auth Modal with fixed text color and improved Google sign-in -->
+<div id="auth-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:30px; border-radius:10px; box-shadow:0 8px 16px rgba(0,0,0,0.3); z-index:1000; max-width:400px; width:90%;">
+    <div id="auth-tabs" style="display:flex; margin-bottom:20px; border-bottom:1px solid #ddd;">
+        <button id="login-tab" class="auth-tab active" style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid #007BFF; font-weight:bold; cursor:pointer;">Log Ind</button>
+        <button id="signup-tab" class="auth-tab" style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer;">Opret Konto</button>
+    </div>
+    
+    <!-- Login Form -->
+    <form id="login-form" style="display:block;">
+        <div style="margin-bottom:15px;">
+            <label for="login-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+            <input type="email" id="login-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label for="login-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+            <input type="password" id="login-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Log Ind</button>
+            <button type="button" onclick="closeAuthModal()" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+        </div>
+        <div style="margin-top:15px; text-align:center;">
+            <a href="#" id="forgot-password" style="color:#007BFF; text-decoration:none; font-size:14px;">Glemt adgangskode?</a>
+        </div>
+    </form>
+    
+    <!-- Signup Form -->
+    <form id="signup-form" style="display:none;">
+        <div style="margin-bottom:15px;">
+            <label for="signup-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+            <input type="email" id="signup-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label for="signup-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+            <input type="password" id="signup-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+        </div>
+        <div style="margin-bottom:15px;">
+            <label for="signup-confirm-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Bekræft adgangskode:</label>
+            <input type="password" id="signup-confirm-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Opret Konto</button>
+            <button type="button" onclick="closeAuthModal()" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+        </div>
+    </form>
+    
+    <!-- Reset Password Form -->
+    <form id="reset-form" style="display:none;">
+        <div style="margin-bottom:15px;">
+            <label for="reset-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+            <input type="email" id="reset-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-top:20px;">
+            <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Nulstil Adgangskode</button>
+            <button type="button" id="back-to-login" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Tilbage</button>
+        </div>
+    </form>
+    
+    <div id="auth-message" style="margin-top:15px; text-align:center; display:none;"></div>
+    
+    <div style="margin-top:20px; text-align:center;">
+        <p style="margin-bottom:10px; font-weight:bold; color:#333;">Opret Konto eller log ind</p>
+        <!-- Removed Google login button -->
+    </div>
+</div>
+
+<style>
+/* Popup Styling */
+#game-popup {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 100%;
+	max-width: 800px;
+	padding: 2rem;
+	background: rgba(0, 0, 0, 0.85);
+	color: white;
+	border-radius: 10px;
+	box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+	text-align: center;
+	z-index: 1000;
+}
+
+#game-popup .cs-container {
+	position: relative;
+	z-index: 2;
+}
+
+#game-popup .cs-title {
+	font-size: 2rem;
+	font-weight: bold;
+	margin-bottom: 1rem;
+}
+
+#game-popup .cs-description {
+	font-size: 1.2rem;
+	margin-bottom: 2rem;
+}
+
+#game-popup .cs-link {
+	font-size: 1.25rem;
+	line-height: 1.2em;
+	text-transform: uppercase;
+	text-decoration: none;
+	font-weight: 700;
+	color: white;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 1rem;
+	background: #007BFF;
+	padding: 0.75rem 1.5rem;
+	border-radius: 5px;
+	transition: background 0.3s;
+}
+
+#game-popup .cs-link:hover {
+	background: #0056b3;
+}
+
+#game-popup .cs-wrapper {
+	width: 3rem;
+	height: 3rem;
+	background-color: white;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#game-popup .cs-icon {
+	width: 1.5rem;
+	height: auto;
+}
+
+#game-popup .cs-close-button {
+	margin-top: 1.5rem;
+	padding: 0.5rem 1rem;
+	background: #FF4D4D;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	font-size: 1rem;
+	transition: background 0.3s;
+}
+
+#game-popup .cs-close-button:hover {
+	background: #cc0000;
+}
+
+#game-popup .cs-background {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1;
+}
+
+#game-popup .cs-background img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#popup-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+}
+    
+/* Auth Modal Styling */
+.auth-tab.active {
+    border-bottom-color: #007BFF !important;
+    color: #007BFF;
+}
+
+#auth-message {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+#auth-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+#auth-message.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+</style>
+
+<script>
+// Show popup after 10 seconds
+setTimeout(() => {
+	const popup = document.getElementById('game-popup');
+	const overlay = document.getElementById('popup-overlay');
+    if (popup && overlay) {
+	    popup.style.display = 'block';
+	    overlay.style.display = 'block';
+    }
+}, 10000);
+
+// Close popup function
+function closeGamePopup() {
+	const popup = document.getElementById('game-popup');
+	const overlay = document.getElementById('popup-overlay');
+    if (popup && overlay) {
+	    popup.style.display = 'none';
+	    overlay.style.display = 'none';
+    }
+}
+
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyAl2HDC3-4dkrZtf2ho6Bf2jsRfMY7EdQc",
+    authDomain: "kritiskklik.firebaseapp.com",
+    projectId: "kritiskklik",
+    storageBucket: "kritiskklik.firebasestorage.app",
+    messagingSenderId: "792072906036",
+    appId: "1:792072906036:web:8ccccdb11ca493d465f161"
+};
+
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
+
+// Auth Modal Functions
+document.getElementById('auth-button').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('auth-modal').style.display = 'block';
+    document.getElementById('modal-overlay').style.display = 'block';
+});
+
+function closeAuthModal() {
+    document.getElementById('auth-modal').style.display = 'none';
+    document.getElementById('modal-overlay').style.display = 'none';
+}
+
+// Tab switching
+document.getElementById('login-tab').addEventListener('click', function() {
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('signup-form').style.display = 'none';
+    document.getElementById('reset-form').style.display = 'none';
+    document.getElementById('login-tab').classList.add('active');
+    document.getElementById('signup-tab').classList.remove('active');
+    hideAuthMessage();
+});
+
+document.getElementById('signup-tab').addEventListener('click', function() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('signup-form').style.display = 'block';
+    document.getElementById('reset-form').style.display = 'none';
+    document.getElementById('login-tab').classList.remove('active');
+    document.getElementById('signup-tab').classList.add('active');
+    hideAuthMessage();
+});
+
+document.getElementById('forgot-password').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('signup-form').style.display = 'none';
+    document.getElementById('reset-form').style.display = 'block';
+    hideAuthMessage();
+});
+
+document.getElementById('back-to-login').addEventListener('click', function() {
+    document.getElementById('login-form').style.display = 'block';
+    document.getElementById('signup-form').style.display = 'none';
+    document.getElementById('reset-form').style.display = 'none';
+    hideAuthMessage();
+});
+
+// Handle login form submission
+document.getElementById('login-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    
+    auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            showAuthMessage('Du er nu logget ind!', false);
+            setTimeout(() => {
+                closeAuthModal();
+                updateAuthButton();
+            }, 1500);
+        })
+        .catch((error) => {
+            let errorMessage = 'Der opstod en fejl ved login';
+            if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                errorMessage = 'Forkert email eller adgangskode';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = 'Ugyldig email-adresse';
+            }
+            showAuthMessage(errorMessage);
+        });
+});
+
+// Handle signup form submission
+document.getElementById('signup-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('signup-email').value;
+    const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('signup-confirm-password').value;
+    
+    if (password !== confirmPassword) {
+        showAuthMessage('Adgangskoderne matcher ikke');
+        return;
+    }
+    
+    auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            showAuthMessage('Konto oprettet! Du er nu logget ind.', false);
+            setTimeout(() => {
+                closeAuthModal();
+                updateAuthButton();
+            }, 1500);
+        })
+        .catch((error) => {
+            let errorMessage = 'Der opstod en fejl ved oprettelse af konto';
+            if (error.code === 'auth/email-already-in-use') {
+                errorMessage = 'Denne email er allerede i brug';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = 'Ugyldig email-adresse';
+            } else if (error.code === 'auth/weak-password') {
+                errorMessage = 'Adgangskoden er for svag';
+            }
+            showAuthMessage(errorMessage);
+        });
+});
+
+// Handle reset password form submission
+document.getElementById('reset-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const email = document.getElementById('reset-email').value;
+    
+    auth.sendPasswordResetEmail(email)
+        .then(() => {
+            showAuthMessage('Instruktioner til nulstilling af adgangskode er sendt til din email.', false);
+            setTimeout(() => {
+                document.getElementById('login-tab').click();
+            }, 3000);
+        })
+        .catch((error) => {
+            let errorMessage = 'Der opstod en fejl ved anmodning om nulstilling af adgangskode';
+            if (error.code === 'auth/user-not-found') {
+                errorMessage = 'Ingen bruger fundet med denne email';
+            } else if (error.code === 'auth/invalid-email') {
+                errorMessage = 'Ugyldig email-adresse';
+            }
+            showAuthMessage(errorMessage);
+        });
+});
+
+function showAuthMessage(message, isError = true) {
+    const messageElement = document.getElementById('auth-message');
+    messageElement.textContent = message;
+    messageElement.style.display = 'block';
+    
+    if (isError) {
+        messageElement.classList.add('error');
+        messageElement.classList.remove('success');
+    } else {
+        messageElement.classList.add('success');
+        messageElement.classList.remove('error');
+    }
+}
+
+function hideAuthMessage() {
+    document.getElementById('auth-message').style.display = 'none';
+}
+
+// Update auth button based on authentication state
+function updateAuthButton() {
+    const authButton = document.getElementById('auth-button');
+    const currentUser = auth.currentUser;
+    
+    if (currentUser) {
+        authButton.textContent = 'Log Ud';
+        authButton.onclick = function(e) {
+            e.preventDefault();
+            auth.signOut().then(() => {
+                updateAuthButton();
+            });
+        };
+    } else {
+        authButton.textContent = 'Opret Konto';
+        authButton.onclick = function(e) {
+            e.preventDefault();
+            document.getElementById('auth-modal').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+        };
+    }
+}
+
+// Check auth state on page load
+document.addEventListener('DOMContentLoaded', function() {
+    auth.onAuthStateChanged(function(user) {
+        updateAuthButton();
+    });
+    
+    // Professional Navigation Bar Script
+    const menuToggle = document.querySelector(".pro-menu-toggle");
+    const navMenu = document.querySelector(".pro-nav-menu");
+    const body = document.body;
+    
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", function() {
+            navMenu.classList.toggle("active");
+            
+            // Prevent body scrolling when menu is open
+            if (navMenu.classList.contains("active")) {
+                body.style.overflow = "hidden";
+            } else {
+                body.style.overflow = "";
+            }
+        });
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener("click", function(e) {
+        if (
+            navMenu && 
+            navMenu.classList.contains("active") && 
+            !e.target.closest(".pro-nav") && 
+            !e.target.closest(".pro-menu-toggle")
+        ) {
+            navMenu.classList.remove("active");
+            body.style.overflow = "";
+        }
+    });
+    
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function(e) {
+            e.preventDefault();
+            
+            const targetId = this.getAttribute("href");
+            if (targetId === "#") return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                // Close mobile menu if open
+                if (navMenu && navMenu.classList.contains("active")) {
+                    navMenu.classList.remove("active");
+                    body.style.overflow = "";
+                }
+                
+                // Smooth scroll to target
+                targetElement.scrollIntoView({
+                    behavior: "smooth",
+                    block: "start"
+                });
+            }
+        });
+    });
+});
+</script>
+
+			<style>
+				/* Add hover effects for buttons */
+				.button.primary:hover {
+					background: #333; /* Darker shade for hover effect */
+				}
+
+				.button:hover {
+					background: #e2e6ea;
+					color: #000;
+				}
+
+				.cs-button-6 {
+					text-align: center;
+					font-size: 1rem;
+					line-height: clamp(2.875rem, 8vw, 3.5rem);
+					text-decoration: none;
+					font-weight: 700;
+					min-width: 10.875rem;
+					margin: auto;
+					color: #fff; /* Change text color to white */
+					padding: 0 1.5rem;
+					box-sizing: border-box;
+					background-color: #000; /* Change background to black */
+					border: 2px solid #000; /* Match border color to black */
+					display: inline-flex;
+					align-items: center;
+					justify-content: space-between;
+					gap: 1.5rem;
+					position: relative;
+					z-index: 1;
+					transition: color 0.3s, background-color 0.3s;
+				}
+				.cs-button-6:before {
+					content: "";
+					width: 0.375rem;
+					height: 100%;
+					background: #fff; /* Change hover effect to white */
+					opacity: 1;
+					position: absolute;
+					display: block;
+					bottom: 0;
+					left: 0;
+					transition: width 0.3s;
+					z-index: -1;
+				}
+				.cs-button-6 .cs-icon path {
+					transition: fill 0.3s;
+					fill: #fff; /* Change icon color to white */
+				}
+				.cs-button-6:hover {
+					color: #000; /* Change text color to black on hover */
+					background-color: #fff; /* Change background to white on hover */
+				}
+				.cs-button-6:hover:before {
+					width: 100%;
+				}
+				.cs-button-6:hover .cs-icon path {
+					fill: #000; /* Change icon color to black on hover */
+				}
+			</style>
+
+	
+	</div>
+	
+
+</script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-app.js";
+  import { getAnalytics } from "https://www.gstatic.com/firebasejs/11.7.1/firebase-analytics.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyAl2HDC3-4dkrZtf2ho6Bf2jsRfMY7EdQc",
+    authDomain: "kritiskklik.firebaseapp.com",
+    projectId: "kritiskklik",
+    storageBucket: "kritiskklik.firebasestorage.app",
+    messagingSenderId: "792072906036",
+    appId: "1:792072906036:web:8ccccdb11ca493d465f161",
+    measurementId: "G-5HEGMW2TJT"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+
+  <main>
+    <section class="page-hero">
+      <div class="hero-content">
+        <div class="container">
+          <h1>AI Psykolog</h1>
+          <p>Tal med vores AI-baserede psykolog om dine tanker, følelser og bekymringer</p>
+        </div>
+      </div>
+    </section>
+    <!-- Erstat denne linje: -->
+<!-- <iframe src="https://psykologbot.vercel.app/" width="100%" height="600" style="border:none"></iframe> -->
+
+<!-- Med dette: -->
+<div style="width:100%; height:500px; overflow:hidden; border-radius:8px; margin-bottom: 2rem;">
+  <iframe 
+    src="https://psykologbot.vercel.app/" 
+    width="100%" 
+    height="650" 
+    style="border:none; position:relative; top:-70px;"
+    title="AI Psykolog Bot"
+    allow="camera; microphone"
+  ></iframe>
+</div>
+
+    <section class="ai-chat-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Din personlige AI psykolog</h2>
+          <div class="underline"></div>
+        </div>
+     <p class="section-intro">
+  Vores AI psykolog er designet til at hjælpe dig med at udforske dine tanker og følelser omkring angst og andre
+  psykologiske udfordringer.
+  Samtalen er privat og fortrolig. Husk dog, at dette er et værktøj til selvrefleksion og ikke en erstatning for
+  professionel hjælp.
+</p>
+
+<!-- Anam Persona Button -->
+<div class="anam-button-container" style="text-align: center; margin: 20px 0;">
+  <button id="anam-toggle-button" class="btn primary-btn" style="padding: 12px 25px; font-weight: bold; display: inline-block; text-decoration: none;">
+    <i class="fas fa-robot" style="margin-right: 8px;"></i> Start AI Psykolog Samtale
+  </button>
+</div>
+
+<!-- Embedded iframe container (no iframe inside initially) -->
+<div id="anam-iframe-container" style="display: none; text-align: center; margin: 20px 0;">
+  <!-- iframe will be inserted here by JS -->
+</div>
+
+<script>
+  // Toggle iframe visibility and create/remove iframe dynamically
+  document.getElementById('anam-toggle-button').addEventListener('click', function () {
+    const iframeContainer = document.getElementById('anam-iframe-container');
+    if (iframeContainer.style.display === 'none') {
+      iframeContainer.style.display = 'block';
+      // Only create iframe if not already present
+      if (!iframeContainer.querySelector('iframe')) {
+        const iframe = document.createElement('iframe');
+        iframe.src = "https://lab.anam.ai/share?linkToken=D6J4bvlanhFugPlZoCpS_";
+        iframe.style.width = "80%";
+        iframe.style.height = "500px";
+        iframe.style.border = "1px solid #ccc";
+        iframe.style.borderRadius = "8px";
+        iframe.allow = "camera; microphone";
+        iframeContainer.appendChild(iframe);
+      }
+    } else {
+      iframeContainer.style.display = 'none';
+      // Remove iframe to stop loading/running
+      const existingIframe = iframeContainer.querySelector('iframe');
+      if (existingIframe) {
+        existingIframe.remove();
+      }
+    }
+  });
+</script>
+
+    <section class="info-section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Om AI psykologen</h2>
+          <div class="underline"></div>
+        </div>
+        <div class="info-grid">
+          <div class="info-text">
+            <h3>Hvordan kan AI psykologen hjælpe?</h3>
+            <p>AI psykologen er designet til at hjælpe dig med at reflektere over dine tanker og følelser. Den kan give dig
+              indsigt i almindelige psykologiske udfordringer og foreslå teknikker til at håndtere angst og stress.</p>
+            <p>Samtalen er baseret på evidensbaserede psykologiske principper, herunder kognitiv adfærdsterapi og
+              mindfulness-teknikker.</p>
+            <p><strong>Bemærk:</strong> Dette er et digitalt værktøj og ikke en erstatning for professionel psykologhjælp. Hvis
+              du oplever alvorlige psykiske problemer, bør du altid kontakte en læge eller psykolog.</p>
+          </div>
+          <div class="info-image">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5OVnGVLMVTqO0GIaXxa7OO3Qi8CXhVXJOqQ&s"
+              alt="Illustration af terapi">
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Login Required Overlay -->
+  <div id="login-required-overlay">
+    <div class="login-required-content">
+      <h2>Log ind for at fortsætte</h2>
+      <p>Du skal være logget ind for at bruge AI psykologen. Opret en konto eller log ind for at fortsætte.</p>
+      <div class="login-required-buttons">
+        <button class="login-required-login" id="login-required-login">Log ind</button>
+        <button class="login-required-cancel" id="login-required-cancel">Annuller</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Auth Modal -->
+  <div id="auth-modal"
+    style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:30px; border-radius:10px; box-shadow:0 8px 16px rgba(0,0,0,0.3); z-index:1000; max-width:400px; width:90%;">
+    <div id="auth-tabs" style="display:flex; margin-bottom:20px; border-bottom:1px solid #ddd;">
+      <button id="login-tab" class="auth-tab active"
+        style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid #007BFF; font-weight:bold; cursor:pointer;">Log
+        Ind</button>
+      <button id="signup-tab" class="auth-tab"
+        style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer;">Opret
+        Konto</button>
+    </div>
+
+    <!-- Login Form -->
+    <form id="login-form" style="display:block;">
+      <div style="margin-bottom:15px;">
+        <label for="login-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+        <input type="email" id="login-email" required
+          style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+      </div>
+      <div style="margin-bottom:15px;">
+        <label for="login-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+        <input type="password" id="login-password" required
+          style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:20px;">
+        <button type="submit"
+          style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Log
+          Ind</button>
+        <button type="button" onclick="closeAuthModal()"
+          style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+      </div>
+      <div style="margin-top:15px; text-align:center;">
+        <a href="#" id="forgot-password" style="color:#007BFF; text-decoration:none; font-size:14px;">Glemt
+          adgangskode?</a>
+      </div>
+    </form>
+
+    <!-- Signup Form -->
+    <form id="signup-form" style="display:none;">
+      <div style="margin-bottom:15px;">
+        <label for="signup-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+        <input type="email" id="signup-email" required
+          style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+      </div>
+      <div style="margin-bottom:15px;">
+        <label for="signup-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+        <input type="password" id="signup-password" required
+          style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+      </div>
+      <div style="margin-bottom:15px;">
+        <label for="signup-confirm-password"
+          style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Bekræft adgangskode:</label>
+        <input type="password" id="signup-confirm-password" required
+          style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:20px;">
+        <button type="submit"
+          style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Opret
+          Konto</button>
+        <button type="button" onclick="closeAuthModal()"
+          style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+      </div>
+    </form>
+
+    <!-- Reset Password Form -->
+    <form id="reset-form" style="display:none;">
+      <div style="margin-bottom:15px;">
+        <label for="reset-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+        <input type="email" id="reset-email" required
+          style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:20px;">
+        <button type="submit"
+          style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Nulstil
+          Adgangskode</button>
+        <button type="button" id="back-to-login"
+          style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Tilbage</button>
+      </div>
+    </form>
+
+    <div id="auth-message" style="margin-top:15px; text-align:center; display:none;"></div>
+
+    <div style="margin-top:20px; text-align:center;">
+      <p style="margin-bottom:10px; font-weight:bold; color:#333;">Opret Konto eller log ind</p>
+      <button id="google-signin" style="width:100%; padding:10px; margin-top:10px; background:#fff; color:#333; border:1px solid #ddd; border-radius:5px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:500; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+          <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" style="width:18px; height:18px; margin-right:10px;">
+          Log ind med Google
+      </button>
+    </div>
+  </div>
+
+  <div id="modal-overlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:999;"></div>
+
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-info">
+          <div class="footer-logo">
+            <img src="images/Taenk-Trygt.png" alt="Logo">
+          </div>
+          <!-- Search Bar Component -->
+<div class="search-container">
+  <div class="search-wrapper">
+    <input type="text" id="site-search" class="search-input" placeholder="Søg på siden..." aria-label="Søg på siden">
+    <button type="button" id="search-button" class="search-button">
+      <!-- Removed the search icon -->
+    </button>
+  </div>
+  <div id="search-results" class="search-results" style="display: none;">
+    <!-- Search results will appear here -->
+  </div>
+</div>
+
+<style>
+/* Search Bar Styles */
+.search-container {
+  position: relative;
+  margin-right: 15px;
+}
+
+.search-wrapper {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.search-input {
+  padding: 8px 12px;
+  padding-right: 40px;
+  border: 1px solid var(--gray-300, #e2e8f0);
+  border-radius: 6px;
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  width: 200px;
+  transition: all 0.3s ease;
+  background-color: var(--background-color, #fff);
+  color: var(--text-color, #2d3748);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary-color, #3a6ea5);
+  box-shadow: 0 0 0 2px rgba(58, 110, 165, 0.2);
+  width: 250px;
+}
+
+.search-button {
+  position: absolute;
+  right: 10px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-500, #a0aec0);
+  transition: color 0.3s ease;
+}
+
+.search-button:hover {
+  color: var(--primary-color, #3a6ea5);
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background-color: var(--background-color, #fff);
+  border: 1px solid var(--gray-300, #e2e8f0);
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-top: 5px;
+  z-index: 1000;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.search-result-item {
+  padding: 10px 15px;
+  border-bottom: 1px solid var(--gray-200, #edf2f7);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: var(--gray-100, #f7fafc);
+}
+
+.search-result-title {
+  font-weight: 600;
+  color: var(--text-color, #2d3748);
+  margin-bottom: 3px;
+}
+
+.search-result-description {
+  font-size: 0.85rem;
+  color: var(--gray-600, #718096);
+}
+
+.search-highlight {
+  background-color: rgba(58, 110, 165, 0.2);
+  padding: 0 2px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .search-container {
+    width: 100%;
+    margin: 0.5rem 0;
+  }
+  
+  .search-input {
+    width: 100%;
+  }
+  
+  .search-input:focus {
+    width: 100%;
+  }
+}
+</style>
+
+<script>
+// Search functionality
+document.addEventListener('DOMContentLoaded', function() {
+  const searchInput = document.getElementById('site-search');
+  const searchButton = document.getElementById('search-button');
+  const searchResults = document.getElementById('search-results');
+  
+  // Sample content to search through - you'll need to replace this with your actual content
+  const siteContent = [
+    { title: 'Forside', url: 'index.html', content: 'Angst er en naturlig følelse, der skal beskytte dig mod fare. Men når angsten begynder at begrænse dig i din hverdag, kan du gøre noget ved det.' },
+    { title: 'Video', url: 'video.html', content: 'Lær mere om angst gennem vores informative video. Vores video er under produktion og kommer snart!' },
+    { title: 'Quiz', url: 'quiz.html', content: 'Test din viden om angst eller find ud af, hvilken type angst du muligvis oplever.' },
+    { title: 'Hvem er vi?', url: 'om-os.html', content: 'Lær mere om vores team og projektet bag hjemmesiden om angst blandt unge.' },
+    { title: 'AI Psykolog', url: 'ai.html', content: 'Tal med vores AI-baserede psykolog om dine tanker, følelser og bekymringer.' },
+    { title: 'Generaliseret angst', url: 'index.html#generaliseret', content: 'Angst for flere forskellige ting og situationer. Der er en konstant nervøsitet og anspændthed eller væren på vagt.' },
+    { title: 'Panikangst', url: 'index.html#panik', content: 'Opleves som voldsom hjertebanken, svimmelhed, uvirkelighedsfølelse og angst for at blive sindssyg eller at dø.' },
+    { title: 'Social angst', url: 'index.html#social', content: 'Kendetegnet ved ubehag i sociale situationer. Den unge er bange for at gøre noget pinligt, være utilstrækkelig eller at blive grinet ad.' }
+  ];
+  
+  function performSearch() {
+    const query = searchInput.value.trim().toLowerCase();
+    
+    if (query.length < 2) {
+      searchResults.style.display = 'none';
+      return;
+    }
+    
+    const results = siteContent.filter(item => 
+      item.title.toLowerCase().includes(query) || 
+      item.content.toLowerCase().includes(query)
+    );
+    
+    if (results.length > 0) {
+      displayResults(results, query);
+    } else {
+      searchResults.innerHTML = '<div class="search-result-item">Ingen resultater fundet</div>';
+      searchResults.style.display = 'block';
+    }
+  }
+  
+  function displayResults(results, query) {
+    searchResults.innerHTML = '';
+    
+    results.forEach(result => {
+      const resultItem = document.createElement('div');
+      resultItem.className = 'search-result-item';
+      
+      // Highlight matching text
+      const titleHighlighted = highlightText(result.title, query);
+      const contentHighlighted = highlightText(result.content, query);
+      
+      resultItem.innerHTML = `
+        <div class="search-result-title">${titleHighlighted}</div>
+        <div class="search-result-description">${contentHighlighted.substring(0, 100)}${result.content.length > 100 ? '...' : ''}</div>
+      `;
+      
+      resultItem.addEventListener('click', function() {
+        window.location.href = result.url;
+      });
+      
+      searchResults.appendChild(resultItem);
+    });
+    
+    searchResults.style.display = 'block';
+  }
+  
+  function highlightText(text, query) {
+    const regex = new RegExp(`(${query})`, 'gi');
+    return text.replace(regex, '<span class="search-highlight">$1</span>');
+  }
+  
+  // Event listeners
+  searchInput.addEventListener('input', performSearch);
+  
+  searchButton.addEventListener('click', performSearch);
+  
+  // Close search results when clicking outside
+  document.addEventListener('click', function(e) {
+    if (!searchInput.contains(e.target) && !searchButton.contains(e.target) && !searchResults.contains(e.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
+  
+  // Close search results when pressing Escape
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      searchResults.style.display = 'none';
+    }
+  });
+});
+</script>
+          
+        
+        </div>
+        <div class="footer-links">
+          <h4>Sider</h4>
+          <ul>
+            <li><a href="index.html">Forside</a></li>
+            <li><a href="video.html">Video</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
+            <li><a href="ai.html">AI Psykolog</a></li>
+            <li><a href="om-os.html">Hvem er vi?</a></li>
+          </ul>
+        </div>
+        <div class="footer-contact">
+          <h4>Kontakt</h4>
+          <ul>
+            <li><i class="fas fa-envelope"></i> kontakt@angstblandtunge.dk</li>
+            <li><i class="fas fa-phone"></i> +45 12 34 56 78</li>
+            <li><i class="fas fa-map-marker-alt"></i> København, Danmark</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2023 Angst blandt unge. Alle rettigheder forbeholdes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAl2HDC3-4dkrZtf2ho6Bf2jsRfMY7EdQc",
+      authDomain: "kritiskklik.firebaseapp.com",
+      projectId: "kritiskklik",
+      storageBucket: "kritiskklik.firebasestorage.app",
+      messagingSenderId: "792072906036",
+      appId: "1:792072906036:web:8ccccdb11ca493d465f161"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+
+    // DOM Elements
+    const initialForm = document.getElementById('initial-form');
+    const chatContainer = document.getElementById('chat-container');
+    const chatMessages = document.getElementById('chat-messages');
+    const messageInput = document.getElementById('message-input');
+    const sendButton = document.getElementById('send-message');
+    const startChatButton = document.getElementById('start-chat');
+    const mainConcernInput = document.getElementById('main-concern');
+    const loginRequiredOverlay = document.getElementById('login-required-overlay');
+    const loginRequiredLoginButton = document.getElementById('login-required-login');
+    const loginRequiredCancelButton = document.getElementById('login-required-cancel');
+    const authButton = document.getElementById('auth-button');
+    const authModal = document.getElementById('auth-modal');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const psychologistMouth = document.getElementById('psychologist-mouth');
+
+    // Variables
+    let userMainConcern = '';
+    let isTyping = false;
+    let chatHistory = [];
+    let isTalking = false;
+    let assessmentMode = true;
+    let questionCount = 0;
+    let maxQuestions = Math.floor(Math.random() * 5) + 6; // Random between 6-10 questions
+    let diagnosisGiven = false;
+    let userResponses = [];
+
+    // Check authentication state on page load
+    document.addEventListener('DOMContentLoaded', function () {
+      auth.onAuthStateChanged(function (user) {
+        updateAuthButton();
+      });
+
+      // Professional Navigation Bar Script
+      const menuToggle = document.querySelector(".pro-menu-toggle");
+      const navMenu = document.querySelector(".pro-nav-menu");
+      const body = document.body;
+
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", function () {
+          navMenu.classList.toggle("active");
+
+          // Prevent body scrolling when menu is open
+          if (navMenu.classList.contains("active")) {
+            body.style.overflow = "hidden";
+          } else {
+            body.style.overflow = "";
+          }
+        });
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (e) {
+        if (
+          navMenu && 
+          navMenu.classList.contains("active") && 
+          !e.target.closest(".pro-nav") && 
+          !e.target.closest(".pro-menu-toggle")
+        ) {
+          navMenu.classList.remove("active");
+          body.style.overflow = "";
+        }
+      });
+    });
+
+    // Update auth button based on authentication state
+    function updateAuthButton() {
+      const currentUser = auth.currentUser;
+
+      if (currentUser) {
+        authButton.textContent = 'Log Ud';
+        authButton.onclick = function (e) {
+          e.preventDefault();
+          auth.signOut().then(() => {
+            updateAuthButton();
+            // Hide chat if open
+            initialForm.style.display = 'block';
+            chatContainer.style.display = 'none';
+          });
+        };
+      } else {
+        authButton.textContent = 'Opret Konto';
+        authButton.onclick = function (e) {
+          e.preventDefault();
+          authModal.style.display = 'block';
+          modalOverlay.style.display = 'block';
+        };
+      }
+    }
+
+    // Auth Modal Functions
+    function closeAuthModal() {
+      authModal.style.display = 'none';
+      modalOverlay.style.display = 'none';
+    }
+
+    // Tab switching
+    document.getElementById('login-tab').addEventListener('click', function () {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('reset-form').style.display = 'none';
+      document.getElementById('login-tab').classList.add('active');
+      document.getElementById('signup-tab').classList.remove('active');
+      hideAuthMessage();
+    });
+
+    document.getElementById('signup-tab').addEventListener('click', function () {
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'block';
+      document.getElementById('reset-form').style.display = 'none';
+      document.getElementById('login-tab').classList.remove('active');
+      document.getElementById('signup-tab').classList.add('active');
+      hideAuthMessage();
+    });
+
+    document.getElementById('forgot-password').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('login-form').style.display = 'none';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('reset-form').style.display = 'block';
+      hideAuthMessage();
+    });
+
+    document.getElementById('back-to-login').addEventListener('click', function () {
+      document.getElementById('login-form').style.display = 'block';
+      document.getElementById('signup-form').style.display = 'none';
+      document.getElementById('reset-form').style.display = 'none';
+      hideAuthMessage();
+    });
+
+    // Handle login form submission
+    document.getElementById('login-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('login-email').value;
+      const password = document.getElementById('login-password').value;
+
+      auth.signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          showAuthMessage('Du er nu logget ind!', false);
+          setTimeout(() => {
+            closeAuthModal();
+            updateAuthButton();
+            hideLoginRequiredOverlay();
+          }, 1500);
+        })
+        .catch((error) => {
+          let errorMessage = 'Der opstod en fejl ved login';
+          if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+            errorMessage = 'Forkert email eller adgangskode';
+          } else if (error.code === 'auth/invalid-email') {
+            errorMessage = 'Ugyldig email-adresse';
+          }
+          showAuthMessage(errorMessage);
+        });
+    });
+
+    // Handle signup form submission
+    document.getElementById('signup-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('signup-email').value;
+      const password = document.getElementById('signup-password').value;
+      const confirmPassword = document.getElementById('signup-confirm-password').value;
+
+      if (password !== confirmPassword) {
+        showAuthMessage('Adgangskoderne matcher ikke');
+        return;
+      }
+
+      auth.createUserWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          showAuthMessage('Konto oprettet! Du er nu logget ind.', false);
+          setTimeout(() => {
+            closeAuthModal();
+            updateAuthButton();
+            hideLoginRequiredOverlay();
+          }, 1500);
+        })
+        .catch((error) => {
+          let errorMessage = 'Der opstod en fejl ved oprettelse af konto';
+          if (error.code === 'auth/email-already-in-use') {
+            errorMessage = 'Denne email er allerede i brug';
+          } else if (error.code === 'auth/invalid-email') {
+            errorMessage = 'Ugyldig email-adresse';
+          } else if (error.code === 'auth/weak-password') {
+            errorMessage = 'Adgangskoden er for svag';
+          }
+          showAuthMessage(errorMessage);
+        });
+    });
+
+    // Handle reset password form submission
+    document.getElementById('reset-form').addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      const email = document.getElementById('reset-email').value;
+
+      auth.sendPasswordResetEmail(email)
+        .then(() => {
+          showAuthMessage('Instruktioner til nulstilling af adgangskode er sendt til din email.', false);
+          setTimeout(() => {
+            document.getElementById('login-tab').click();
+          }, 3000);
+        })
+        .catch((error) => {
+          let errorMessage = 'Der opstod en fejl ved anmodning om nulstilling af adgangskode';
+          if (error.code === 'auth/user-not-found') {
+            errorMessage = 'Ingen bruger fundet med denne email';
+          } else if (error.code === 'auth/invalid-email') {
+            errorMessage = 'Ugyldig email-adresse';
+          }
+          showAuthMessage(errorMessage);
+        });
+    });
+
+    function showAuthMessage(message, isError = true) {
+      const messageElement = document.getElementById('auth-message');
+      messageElement.textContent = message;
+      messageElement.style.display = 'block';
+    
+      if (isError) {
+        messageElement.classList.add('error');
+        messageElement.classList.remove('success');
+      } else {
+        messageElement.classList.add('success');
+        messageElement.classList.remove('error');
+      }
+    }
+
+    function hideAuthMessage() {
+      document.getElementById('auth-message').style.display = 'none';
+    }
+
+    // Login Required Overlay Functions
+    function showLoginRequiredOverlay() {
+      loginRequiredOverlay.style.display = 'flex';
+    }
+
+    function hideLoginRequiredOverlay() {
+      loginRequiredOverlay.style.display = 'none';
+    }
+
+    // Setup login required buttons
+    loginRequiredLoginButton.addEventListener('click', function () {
+      hideLoginRequiredOverlay();
+      authModal.style.display = 'block';
+      modalOverlay.style.display = 'block';
+    });
+
+    loginRequiredCancelButton.addEventListener('click', function () {
+      hideLoginRequiredOverlay();
+    });
+
+    // Check if user is logged in before starting chat
+    function checkAuthBeforeChat() {
+      if (auth.currentUser) {
+        return true;
+      } else {
+        showLoginRequiredOverlay();
+        return false;
+      }
+    }
+
+    // Start chat when button is clicked
+    startChatButton.addEventListener('click', function () {
+      if (!checkAuthBeforeChat()) return;
+
+      userMainConcern = mainConcernInput.value.trim();
+      if (userMainConcern === '') {
+        alert('Venligst beskriv dit hovedproblem før vi starter samtalen.');
+        return;
+      }
+
+      initialForm.style.display = 'none';
+      chatContainer.style.display = 'block';
+
+      // Reset assessment variables
+      assessmentMode = true;
+      questionCount = 0;
+      maxQuestions = Math.floor(Math.random() * 5) + 6; // Random between 6-10 questions
+      diagnosisGiven = false;
+      userResponses = [];
+
+      // Start the conversation
+      startConversation();
+    });
+
+    // Send message when button is clicked or Enter is pressed
+    sendButton.addEventListener('click', sendMessage);
+    messageInput.addEventListener('keypress', function (e) {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    // Function to start the conversation
+    function startConversation() {
+      // Clear any existing messages
+      chatMessages.innerHTML = '';
+      chatHistory = [];
+
+      // Add welcome message
+      addBotMessage(`Hej! Jeg er din AI psykolog. Jeg kan se, at du har nævnt "${userMainConcern}" som dit hovedproblem. Jeg vil gerne stille dig nogle spørgsmål for at forstå din situation bedre og give dig en vurdering. Bagefter kan vi fortsætte samtalen om, hvordan du kan håndtere dine udfordringer.`);
+
+      // Add first assessment question after a short delay
+      setTimeout(() => {
+        askNextAssessmentQuestion();
+      }, 1500);
+    }
+
+    // Function to send a message
+    async function sendMessage() {
+      const message = messageInput.value.trim();
+      if (message === '') return;
+
+      // Add user message to chat
+      addUserMessage(message);
+
+      // Store user response if in assessment mode
+      if (assessmentMode) {
+        userResponses.push(message);
+      }
+
+      // Clear input field
+      messageInput.value = '';
+
+      // Show typing indicator
+      showTypingIndicator();
+
+      // Start talking animation
+      startTalking();
+
+      // Process the message and generate a response
+      try {
+        if (assessmentMode) {
+          // In assessment mode, ask the next question or provide diagnosis
+          questionCount++;
+          
+          if (questionCount >= maxQuestions) {
+            // Time to provide diagnosis
+            const diagnosis = await generateDiagnosis();
+            addBotMessage(diagnosis);
+            assessmentMode = false;
+            diagnosisGiven = true;
+          } else {
+            // Ask next assessment question
+            setTimeout(() => {
+              askNextAssessmentQuestion();
+            }, 1500);
+          }
+        } else {
+          // Normal conversation mode
+          const response = await generateAIResponse(message);
+          addBotMessage(response);
+        }
+      } catch (error) {
+        console.error("Error generating response:", error);
+        addBotMessage("Jeg beklager, der opstod en fejl. Prøv igen senere.");
+      } finally {
+        hideTypingIndicator();
+        stopTalking();
+      }
+    }
+
+    // Function to ask the next assessment question
+    async function askNextAssessmentQuestion() {
+      const question = await getNextAssessmentQuestion();
+      addBotMessage(question);
+    }
+
+    // Function to get the next assessment question
+    async function getNextAssessmentQuestion() {
+      // Simulate API call to get a contextually relevant question
+      await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate delay
+      
+      // These questions are designed to assess anxiety and related mental health issues
+      const assessmentQuestions = [
+        "Påvirker dette problem din dig på skolen eller derhjemme?",
+        "Har du oplevet tvangstanker"
+        "Har du bemærket nogen fysiske symptomer, når du føler dig angst eller stresset?",
+        "Påvirker dette problem din søvn på grund af angst eller hjertebanken?",
+        "Hvis du har prøvet at håndtere disse følelser på egen hånd? Hvad har du forsøgt?",
+        "Er der bestemte situationer eller steder, der udløser dine symptomer som fx hjertebank, pulsstigning og sved.?",
+        "Hvordan påvirker dette problem dine relationer til andre mennesker?",
+        "Har du nogen tanker om, hvad der kunne være årsagen til disse følelser eller symptomer?",
+        "Har du oplevet pludselige angstanfald, hvor du føler intens frygt eller panik? ja eler nej",
+        "Hvordan ser din typiske dag ud, når du har det svært med disse følelser?",
+        "Har du nogen støtte fra familie eller venner i forhold dit problem med pludselig pulsstigning og hjertebank?",
+        "Hvad håber du at få ud af vores samtaler?"
+      ];
+      
+      // Choose a question that hasn't been used yet, or cycle through if all have been used
+      const usedQuestionIndices = chatHistory
+        .filter(msg => msg.role === 'bot' && assessmentQuestions.includes(msg.content))
+        .map(msg => assessmentQuestions.indexOf(msg.content));
+      
+      const availableQuestions = assessmentQuestions.filter((_, index) => !usedQuestionIndices.includes(index));
+      
+      if (availableQuestions.length > 0) {
+        return availableQuestions[Math.floor(Math.random() * availableQuestions.length)];
+      } else {
+        // If all questions have been used, pick a random one
+        return assessmentQuestions[Math.floor(Math.random() * availableQuestions.length)];
+      }
+    }
+
+    // Function to generate a diagnosis based on user responses
+    async function generateDiagnosis() {
+      // Simulate API call to analyze responses and generate diagnosis
+      await new Promise(resolve => setTimeout(resolve, 2500)); // Longer delay to simulate analysis
+      
+      // Analyze keywords in user responses to determine potential issues
+      const keywords = {
+        anxiety: ["angst", "ja", "bekymret", "bange", "frygt", "panik", "uro", "anspændt"],
+        depression: ["trist", "nedtrykt", "energiløs", "håbløs", "meningsløs", "tom", "ked af det"],
+        stress: ["stress", "presset", "nej", "udbrændt", "overvældet", "travlt"],
+        social: ["social", "andre mennesker", "forsamlinger", "grupper", "bedømmelse", "kritik"],
+        autisme: ["søvn", "derhjemme", "skole", "diagnose", "venner", "skolen", "energi","monster", "time", "timen", "tale", "doven"]
+      };
+      
+      // Count keyword occurrences in user responses
+      const keywordCounts = {};
+      Object.keys(keywords).forEach(category => {
+        keywordCounts[category] = 0;
+        keywords[category].forEach(keyword => {
+          userResponses.forEach(response => {
+            if (response.toLowerCase().includes(keyword.toLowerCase())) {
+              keywordCounts[category]++;
+            }
+          });
+        });
+      });
+      
+      // Determine primary issue based on keyword counts
+      let primaryIssue = Object.keys(keywordCounts).reduce((a, b) => keywordCounts[a] > keywordCounts[b] ? a : b);
+      
+      // Determine severity based on frequency and intensity of symptoms
+      let severity = "mild";
+      const totalKeywords = Object.values(keywordCounts).reduce((a, b) => a + b, 0);
+      if (totalKeywords > 15) severity = "svær";
+      else if (totalKeywords > 8) severity = "moderat";
+      
+      // Generate diagnosis HTML
+      const diagnosisHTML = `
+        <div class="diagnosis-result">
+          <h3>Psykologisk Vurdering</h3>
+          <p>Baseret på vores samtale, ser det ud til, at du oplever symptomer på <span class="severity">${severity}</span> ${getDanishTermForIssue(primaryIssue)}.</p>
+          <p>${getDiagnosisDescription(primaryIssue, severity)}</p>
+          <div class="recommendations">
+            <h4>Anbefalinger:</h4>
+            <ul>
+              ${getRecommendations(primaryIssue, severity).map(rec => `<li>${rec}</li>`).join('')}
+            </ul>
+          </div>
+          <div class="diagnosis-actions">
+            <button class="continue-btn" id="continue-conversation">Fortsæt samtalen</button>
+            <button class="new-assessment-btn" id="new-assessment">Start ny vurdering</button>
+          </div>
+        </div>
+      `;
+      
+      // Add diagnosis to chat
+      const messageElement = document.createElement('div');
+      messageElement.className = 'message bot-message';
+      messageElement.innerHTML = diagnosisHTML;
+      chatMessages.appendChild(messageElement);
+      
+      // Add event listeners to buttons
+      setTimeout(() => {
+        document.getElementById('continue-conversation').addEventListener('click', () => {
+          addBotMessage("Lad os fortsætte vores samtale. Hvad vil du gerne tale om i forhold til din situation?");
+        });
+        
+        document.getElementById('new-assessment').addEventListener('click', () => {
+          // Reset assessment variables
+          assessmentMode = true;
+          questionCount = 0;
+          maxQuestions = Math.floor(Math.random() * 5) + 6;
+          diagnosisGiven = false;
+          userResponses = [];
+          
+          addBotMessage("Lad os starte en ny vurdering. Fortæl mig, hvad der bekymrer dig mest lige nu?");
+        });
+      }, 100);
+      
+      // Return empty string since we've already added the diagnosis to the chat
+      return "";
+    }
+
+    // Helper function to get Danish term for psychological issue
+    function getDanishTermForIssue(issue) {
+      const terms = {
+        anxiety: "angst",
+        depression: "depression",
+        stress: "stress",
+        social: "social angst",
+        autisme: "autisme"
+      };
+      return terms[issue] || issue;
+    }
+
+    // Helper function to get description for diagnosis
+    function getDiagnosisDescription(issue, severity) {
+      const descriptions = {
+        anxiety: {
+          mild: "Du oplever milde angsts eller OCD symptomer, som kan påvirke din hverdag i mindre grad. Dette kan inkludere bekymringstanker, nervøsitet og let anspændthed.",
+          moderat: "Du oplever moderate angst eller OCD symptomer, som påvirker din hverdag betydeligt. Dette kan inkludere vedvarende bekymringer, fysiske symptomer som hjertebanken eller åndenød, og tendens til at undgå visse situationer.",
+          svær: "Du oplever svære angst eller OCD symptomer, som har en betydelig indvirkning på din hverdag. Dette kan inkludere intense bekymringer, panikfølelser, fysiske symptomer og undgåelsesadfærd."
+        },
+        depression: {
+          mild: "Du oplever milde symptomer på depression, som kan påvirke dit humør og energiniveau i mindre grad.",
+          moderat: "Du oplever moderate symptomer på depression, som påvirker dit humør, energi og interesse for aktiviteter betydeligt.",
+          svær: "Du oplever svære symptomer på depression, som har en betydelig indvirkning på næsten alle aspekter af dit liv."
+        },
+        stress: {
+          mild: "Du oplever milde stresssymptomer, som kan påvirke din energi og koncentration i mindre grad.",
+          moderat: "Du oplever moderate stresssymptomer, som påvirker din energi, koncentration og generelle velvære betydeligt.",
+          svær: "Du oplever svære stresssymptomer, som har en betydelig indvirkning på din fysiske og mentale sundhed."
+        },
+        social: {
+          mild: "Du oplever mild social angst, som kan gøre dig nervøs i visse sociale situationer.",
+          moderat: "Du oplever moderat social angst, som får dig til at føle ubehag i mange sociale situationer og kan føre til undgåelse.",
+          svær: "Du oplever svær social angst, som får dig til at undgå de fleste sociale situationer og har en betydelig indvirkning på dit liv."
+        },
+        autisme: {
+          mild: "Du oplever milde udfordringer, som kan påvirker dig.",
+          moderat: "Du oplever moderate udfordringer, som påvirker din energi, koncentration og generelle mentale tilstandbetydeligt.",
+          svær: "Du oplever svære udfordringer, som har en betydelig indvirkning på din mentale tilstand."
+        }
+      };
+      
+      return descriptions[issue][severity] || "Baseret på vores samtale, ser det ud til, at du oplever nogle udfordringer, der påvirker dit velvære.";
+    }
+
+    // Helper function to get recommendations based on issue and severity
+    function getRecommendations(issue, severity) {
+      const commonRecommendations = [
+        "Tal med din læge om dine symptomer for at få professionel rådgivning.",
+        "Overvej at søge hjælp hos en psykolog eller terapeut for yderligere støtte."
+      ];
+      
+      const specificRecommendations = {
+        anxiety: [
+          "Prøv mindfulness eller åndedrætsøvelser for at reducere angst i øjeblikket.",
+          "Hold en dagbog over dine angstudløsere for at identificere mønstre.",
+          "Lær om kognitive teknikker til at udfordre negative tanker."
+        ],
+        depression: [
+          "Sørg for at opretholde en regelmæssig døgnrytme og søvnrutine.",
+          "Sæt små, opnåelige mål for at skabe succesoplevelser.",
+          "Forsøg at engagere dig i aktiviteter, der tidligere gav dig glæde, selv om du måske ikke føler samme glæde lige nu."
+        ],
+        stress: [
+          "Prioriter tid til afslapning og selvpleje i din hverdag.",
+          "Lær at sætte grænser og sig nej til opgaver, når det er nødvendigt.",
+          "Overvej stressreducerende aktiviteter som yoga eller meditation."
+        ],
+        social: [
+          "Start med at udfordre din angst i mindre, trygge sociale situationer.",
+          "Øv sociale færdigheder gennem rollespil eller i trygge omgivelser.",
+          "Lær teknikker til at håndtere negative tanker om social bedømmelse."
+        ],
+        autisme: [
+          "Få hjælp fra en psykiater.",
+          "Lav en plan du kan ændre dig så meget så muligt.",
+          "Skab et roligt og behageligt sovemiljø."
+        ]
+      };
+      
+      // Combine common recommendations with issue-specific ones
+      return [...commonRecommendations, ...specificRecommendations[issue]];
+    }
+
+    // Function to generate AI response using Google AI API
+    async function generateAIResponse(userMessage) {
+      // In a real implementation, this would call Google's AI API
+      // For now, we'll simulate a response with a delay
+      
+      await new Promise(resolve => setTimeout(resolve, 1500)); // Simulate API delay
+      
+      // Create a context-aware response based on chat history and user message
+      const lastBotMessages = chatHistory
+        .filter(msg => msg.role === 'bot')
+        .slice(-3)
+        .map(msg => msg.content);
+      
+      const lastUserMessages = chatHistory
+        .filter(msg => msg.role === 'user')
+        .slice(-3)
+        .map(msg => msg.content);
+      
+      // Check for common themes in user message
+      const message = userMessage.toLowerCase();
+      
+      if (message.includes("tak") || message.includes("hjælp")) {
+        return "Det var så lidt. Jeg er her for at hjælpe dig. Er der noget specifikt ved din situation, du gerne vil tale mere om?";
+      }
+      
+      if (message.includes("hvordan") && (message.includes("håndtere") || message.includes("tackle") || message.includes("klare"))) {
+        return "Der er flere strategier, du kan prøve. Mindfulness og åndedrætsøvelser kan hjælpe i øjeblikket. Regelmæssig motion og en god søvnrytme er også vigtig. Og husk, at det er okay at søge professionel hjælp. Hvilken af disse strategier tror du kunne fungere bedst for dig?";
+      }
+      
+      if (message.includes("medicin") || message.includes("piller") || message.includes("behandling")) {
+        return "Medicinsk behandling kan være en mulighed for nogle. Det er vigtigt at diskutere dette med en læge eller psykiater, som kan vurdere, om det er relevant for dig, og hvilken type medicin der eventuelt kunne hjælpe. Har du talt med en læge om dette?";
+      }
+      
+      if (message.includes("familie") || message.includes("venner") || message.includes("forhold") || message.includes("relation")) {
+        return "Relationer kan have stor indflydelse på vores mentale helbred. Det kan være udfordrende at tale med familie og venner om psykiske problemer, men deres støtte kan være meget værdifuld. Hvordan reagerer de mennesker, der står dig nær, når du fortæller om dine udfordringer?";
+      }
+      
+      // Default responses based on the user's main concern
+      const concernResponses = [
+        "Det lyder som en udfordrende situation. Hvordan påvirker det din dagligdag?",
+        "Det er modigt af dig at tale om disse følelser. Hvad tror du kunne være et første skridt mod at få det bedre?",
+        "Dine følelser er helt forståelige. Mange oplever lignende udfordringer. Hvad giver dig håb eller lettelse i svære perioder?",
+      ];
+      
+      return concernResponses[Math.floor(Math.random() * concernResponses.length)];
+    }
+
+    // Function to add a user message to the chat
+    function addUserMessage(message) {
+      const messageElement = document.createElement('div');
+      messageElement.className = 'message user-message';
+
+      const messageContent = document.createElement('div');
+      messageContent.className = 'message-content';
+      messageContent.textContent = message;
+
+      const messageTime = document.createElement('div');
+      messageTime.className = 'message-time';
+      messageTime.textContent = getCurrentTime();
+
+      messageElement.appendChild(messageContent);
+      messageElement.appendChild(messageTime);
+
+      chatMessages.appendChild(messageElement);
+
+      // Add to chat history
+      chatHistory.push({ role: 'user', content: message });
+
+      // Scroll to bottom
+      scrollToBottom();
+    }
+
+    // Function to add a bot message to the chat
+    function addBotMessage(message) {
+      // Skip if message is empty (happens when diagnosis HTML is added directly)
+      if (!message) return;
+      
+      const messageElement = document.createElement('div');
+      messageElement.className = 'message bot-message';
+
+      const messageContent = document.createElement('div');
+      messageContent.className = 'message-content';
+      messageContent.textContent = message;
+
+      const messageTime = document.createElement('div');
+      messageTime.className = 'message-time';
+      messageTime.textContent = getCurrentTime();
+
+      messageElement.appendChild(messageContent);
+      messageElement.appendChild(messageTime);
+
+      chatMessages.appendChild(messageElement);
+
+      // Add to chat history
+      chatHistory.push({ role: 'bot', content: message });
+
+      // Speak the message
+      speakText(message);
+
+      // Scroll to bottom
+      scrollToBottom();
+    }
+
+    // Function to show typing indicator
+    function showTypingIndicator() {
+      if (isTyping) return;
+
+      isTyping = true;
+
+      const typingElement = document.createElement('div');
+      typingElement.className = 'typing-indicator';
+      typingElement.id = 'typing-indicator';
+
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('span');
+        typingElement.appendChild(dot);
+      }
+
+      chatMessages.appendChild(typingElement);
+
+      // Scroll to bottom
+      scrollToBottom();
+    }
+
+    // Function to hide typing indicator
+    function hideTypingIndicator() {
+      isTyping = false;
+
+      const typingElement = document.getElementById('typing-indicator');
+      if (typingElement) {
+        typingElement.remove();
+      }
+    }
+
+    // Function to scroll to the bottom of the chat
+    function scrollToBottom() {
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Function to get current time in HH:MM format
+    function getCurrentTime() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2, '0');
+      const minutes = now.getMinutes().toString().padStart(2, '0');
+      return `${hours}:${minutes}`;
+    }
+
+    // Function to start talking animation
+    function startTalking() {
+      if (psychologistMouth) {
+        isTalking = true;
+        psychologistMouth.classList.add('talking');
+      }
+    }
+
+    // Function to stop talking animation
+    function stopTalking() {
+      if (psychologistMouth) {
+        isTalking = false;
+        psychologistMouth.classList.remove('talking');
+      }
+    }
+
+    // Speech synthesis setup with improved Danish voice
+    const synth = window.speechSynthesis;
+    let isSpeechEnabled = true;
+    let currentUtterance = null;
+    let selectedVoice = null;
+
+    // Sound toggle button
+    const soundToggleBtn = document.getElementById('sound-toggle-btn');
+
+    // Add mute icon to the button
+    soundToggleBtn.innerHTML = '<i class="fas fa-volume-up"></i><i class="fas fa-volume-mute"></i>';
+
+    soundToggleBtn.addEventListener('click', function () {
+      isSpeechEnabled = !isSpeechEnabled;
+      this.classList.toggle('muted');
+
+      // If currently speaking, stop it
+      if (!isSpeechEnabled && synth.speaking) {
+        synth.cancel();
+        stopTalking();
+      }
+    });
+
+    // Initialize voices when they are loaded
+    function initVoices() {
+      const voices = synth.getVoices();
+
+      // Prioritize Danish voices
+      let danishVoice = voices.find(voice => voice.lang === 'da-DK');
+      
+      // If no specific Danish voice is found, try any Danish voice
+      if (!danishVoice) {
+        danishVoice = voices.find(voice => voice.lang.startsWith('da'));
+      }
+
+      // If still no Danish voice, try to find a voice that might handle Danish well
+      if (!danishVoice) {
+        // Try to find a Scandinavian voice as they might handle Danish better
+        danishVoice = voices.find(voice => 
+          voice.lang.startsWith('sv') || // Swedish
+          voice.lang.startsWith('nb') || // Norwegian Bokmål
+          voice.lang.startsWith('nn')    // Norwegian Nynorsk
+        );
+      }
+
+      // If no Danish or Scandinavian voice is found, fallback to the first available voice
+      selectedVoice = danishVoice || voices[0];
+
+      console.log('Selected voice for Danish:', selectedVoice ? selectedVoice.name : 'No voice available');
+    }
+
+    // Initialize voices when they are loaded
+    if (synth.onvoiceschanged !== undefined) {
+      synth.onvoiceschanged = initVoices;
+    } else {
+      // For browsers that don't support onvoiceschanged
+      setTimeout(initVoices, 500);
+    }
+
+    // Improved function to speak text with better Danish pronunciation
+    function speakText(text) {
+      if (!isSpeechEnabled || !selectedVoice) return;
+
+      // Cancel any ongoing speech
+      if (synth.speaking) {
+        synth.cancel();
+      }
+
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.voice = selectedVoice;
+      
+      // Adjust rate and pitch for more natural Danish speech
+      utterance.rate = 0.9;  // Slightly slower for better pronunciation
+      utterance.pitch = 1.0; // Normal pitch
+      utterance.volume = 1.0;
+
+      // Start talking animation
+      startTalking();
+
+      // Store the current utterance
+      currentUtterance = utterance;
+
+      // Event handlers
+      utterance.onend = function () {
+        stopTalking();
+        currentUtterance = null;
+      };
+
+      utterance.onerror = function () {
+        stopTalking();
+        currentUtterance = null;
+        console.error('Speech synthesis error');
+      };
+
+      // Speak the text
+      synth.speak(utterance);
+    }
+
+    // Mobile menu toggle
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    if (menuToggle) {
+      menuToggle.addEventListener('click', function () {
+        navMenu.classList.toggle('active');
+      });
+    }
+
+    // Close menu when clicking outside
+    document.addEventListener('click', function (e) {
+      if (navMenu && navMenu.classList.contains('active') && !e.target.closest('nav')) {
+        navMenu.classList.remove('active');
+      }
+    });
+  </script>
+
+    <!-- Page Transition Overlay -->
+    <div id="page-transition-overlay" class="active"></div>
+    <style>
+    #page-transition-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #153a5b;
+        z-index: 2000;
+        pointer-events: all;
+        transform: translateX(0);
+        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+    }
+    #page-transition-overlay.hide {
+        transform: translateX(-100%);
+        pointer-events: none;
+    }
+    </style>
+    <script>
+    window.addEventListener('load', function() {
+        setTimeout(() => {
+            const overlay = document.getElementById('page-transition-overlay');
+            if (overlay) {
+                overlay.classList.add('hide');
+                overlay.classList.remove('active');
+            }
+        }, 80);
+    });
+    </script>
+</body>
+</html>

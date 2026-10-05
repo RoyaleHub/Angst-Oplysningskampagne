@@ -1,0 +1,1442 @@
+<!DOCTYPE html>
+<link rel="icon" href="https://www.angst.dk/wp-content/uploads/logo-trans-512x512-1.png">
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angst blandt unge | Forside</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Firebase v9 SDK -->
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js';
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail, signOut, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'https://www.gstatic.com/firebasejs/9.22.0/firebase-auth.js';
+        
+        // Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyAl2HDC3-4dkrZtf2ho6Bf2jsRfMY7EdQc",
+            authDomain: "kritiskklik.firebaseapp.com",
+            projectId: "kritiskklik",
+            storageBucket: "kritiskklik.firebasestorage.app",
+            messagingSenderId: "792072906036",
+            appId: "1:792072906036:web:8ccccdb11ca493d465f161",
+            measurementId: "G-5HEGMW2TJT"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        
+        // Make auth available globally
+        window.firebaseAuth = auth;
+        window.firebaseAuthMethods = {
+            signInWithEmailAndPassword,
+            createUserWithEmailAndPassword,
+            sendPasswordResetEmail,
+            signOut,
+            onAuthStateChanged,
+            GoogleAuthProvider,
+            signInWithPopup
+        };
+    </script>
+    
+    <link rel="stylesheet" href="theme-styles.css">
+    <script src="theme-toogle.js" defer></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+    <style>
+    /* Professional Navigation Bar Styles */
+    .pro-header {
+      background-color: var(--background-color, #fff);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .pro-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0.8rem 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .pro-logo {
+      display: flex;
+      align-items: center;
+    }
+
+    .pro-logo img {
+      height: 45px;
+      transition: transform 0.3s ease;
+    }
+
+    .pro-logo img:hover {
+      transform: scale(1.05);
+    }
+
+    .pro-nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .pro-nav-menu li {
+      position: relative;
+      margin: 0;
+      padding: 0;
+    }
+
+    .pro-nav-link {
+      display: block;
+      padding: 0.7rem 1rem;
+      color: var(--text-color, #2d3748);
+      font-weight: 500;
+      font-family: "Poppins", sans-serif;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .pro-nav-link:hover {
+      color: var(--primary-color, #3a6ea5);
+      background-color: rgba(58, 110, 165, 0.08);
+    }
+
+    .pro-nav-link.active {
+      color: var(--primary-color, #3a6ea5);
+      font-weight: 600;
+      position: relative;
+    }
+
+    .pro-nav-link.active::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background-color: var(--primary-color, #3a6ea5);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+
+    .pro-nav-link.active:hover::after {
+      width: 80%;
+    }
+
+    .pro-nav-link:not(.active):hover::after {
+      content: "";
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 3px;
+      background-color: var(--primary-color, #3a6ea5);
+      border-radius: 3px;
+      transition: width 0.3s ease;
+    }
+    .pro-nav-link:not(.active):hover::after {
+      width: 80%;
+    }
+
+    .pro-highlight .pro-btn-small {
+      background-color: var(--primary-color, #3a6ea5);
+      color: #fff;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      font-weight: 600;
+      box-shadow: 0 2px 5px rgba(58, 110, 165, 0.3);
+      transition: all 0.3s ease;
+      cursor: pointer;
+      display: inline-block;
+      text-decoration: none;
+    }
+
+    .pro-highlight .pro-btn-small:hover {
+      background-color: var(--primary-dark, #2c5282);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(58, 110, 165, 0.4);
+    }
+
+    .pro-highlight .pro-btn-small:active {
+      transform: translateY(0);
+      box-shadow: 0 2px 3px rgba(58, 110, 165, 0.3);
+    }
+
+    .theme-toggle {
+      position: relative;
+      width: 40px;
+      height: 40px;
+      border-radius: 6px;
+      background: transparent;
+      border: 2px solid var(--gray-300, #e2e8f0);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-left: 0.5rem;
+    }
+
+    .theme-toggle:hover {
+      border-color: var(--primary-color, #3a6ea5);
+      background-color: rgba(58, 110, 165, 0.08);
+    }
+
+    .theme-toggle i {
+      font-size: 18px;
+      color: var(--text-color, #2d3748);
+      transition: color 0.3s ease;
+    }
+
+    .theme-toggle:hover i {
+      color: var(--primary-color, #3a6ea5);
+    }
+
+    .pro-menu-toggle {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: var(--text-color, #2d3748);
+      background: transparent;
+      border: none;
+      padding: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .pro-menu-toggle:hover {
+      color: var(--primary-color, #3a6ea5);
+    }
+
+    @media (max-width: 992px) {
+      .pro-nav-menu {
+        gap: 0.2rem;
+      }
+
+      .pro-nav-link {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .pro-menu-toggle {
+        display: block;
+      }
+
+      .pro-nav-menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background-color: var(--background-color, #fff);
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        padding: 2rem 0;
+        transition: left 0.3s ease;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        z-index: 99;
+        gap: 1rem;
+      }
+
+      .pro-nav-menu.active {
+        left: 0;
+      }
+
+      .pro-nav-menu li {
+        width: 80%;
+        text-align: center;
+      }
+
+      .pro-nav-link {
+        padding: 1rem;
+        width: 100%;
+        border-radius: 8px;
+      }
+
+      .pro-nav-link.active::after {
+        bottom: 5px;
+        width: 30%;
+      }
+
+      .pro-highlight {
+        margin-top: 1rem;
+        width: 80%;
+      }
+
+      .pro-highlight .pro-btn-small {
+        width: 100%;
+        padding: 1rem;
+      }
+
+      .pro-nav-menu .theme-toggle {
+        margin: 1rem 0;
+      }
+    }
+    
+    /* Custom scroll animations */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .fade-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .fade-in {
+      opacity: 0;
+      transition: opacity 0.8s ease;
+    }
+    
+    .fade-in.active {
+      opacity: 1;
+    }
+    
+    .slide-in-left {
+      opacity: 0;
+      transform: translateX(-50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .slide-in-left.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .slide-in-right {
+      opacity: 0;
+      transform: translateX(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .slide-in-right.active {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    
+    .zoom-in {
+      opacity: 0;
+      transform: scale(0.8);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    
+    .zoom-in.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+    
+    .stagger-item {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    
+    .stagger-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    .delay-100 { transition-delay: 0.1s; }
+    .delay-200 { transition-delay: 0.2s; }
+    .delay-300 { transition-delay: 0.3s; }
+    .delay-400 { transition-delay: 0.4s; }
+    .delay-500 { transition-delay: 0.5s; }
+    .delay-600 { transition-delay: 0.6s; }
+    .delay-700 { transition-delay: 0.7s; }
+    .delay-800 { transition-delay: 0.8s; }
+
+    /* Auth Modal Styling */
+    .auth-tab.active {
+        border-bottom-color: #007BFF !important;
+        color: #007BFF;
+    }
+
+    #auth-message {
+        padding: 10px;
+        border-radius: 5px;
+    }
+
+    #auth-message.error {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+
+    #auth-message.success {
+        background-color: #d4edda;
+        color: #155724;
+    }
+
+    #popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        display: none;
+    }
+
+    /* Search Bar Styles */
+    .search-container {
+      position: relative;
+      margin-right: 15px;
+    }
+
+    .search-wrapper {
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .search-input {
+      padding: 8px 12px;
+      padding-right: 40px;
+      border: 1px solid var(--gray-300, #e2e8f0);
+      border-radius: 6px;
+      font-family: "Poppins", sans-serif;
+      font-size: 0.9rem;
+      width: 200px;
+      transition: all 0.3s ease;
+      background-color: var(--background-color, #fff);
+      color: var(--text-color, #2d3748);
+    }
+
+    .search-input:focus {
+      outline: none;
+      border-color: var(--primary-color, #3a6ea5);
+      box-shadow: 0 0 0 2px rgba(58, 110, 165, 0.2);
+      width: 250px;
+    }
+
+    .search-button {
+      position: absolute;
+      right: 10px;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      color: var(--gray-500, #a0aec0);
+      transition: color 0.3s ease;
+    }
+
+    .search-button:hover {
+      color: var(--primary-color, #3a6ea5);
+    }
+
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      width: 100%;
+      background-color: var(--background-color, #fff);
+      border: 1px solid var(--gray-300, #e2e8f0);
+      border-radius: 6px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-top: 5px;
+      z-index: 1000;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .search-result-item {
+      padding: 10px 15px;
+      border-bottom: 1px solid var(--gray-200, #edf2f7);
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-item:hover {
+      background-color: var(--gray-100, #f7fafc);
+    }
+
+    .search-result-title {
+      font-weight: 600;
+      color: var(--text-color, #2d3748);
+      margin-bottom: 3px;
+    }
+
+    .search-result-description {
+      font-size: 0.85rem;
+      color: var(--gray-600, #718096);
+    }
+
+    .search-highlight {
+      background-color: rgba(58, 110, 165, 0.2);
+      padding: 0 2px;
+    }
+
+    @media (max-width: 768px) {
+      .search-container {
+        width: 100%;
+        margin: 0.5rem 0;
+      }
+      
+      .search-input {
+        width: 100%;
+      }
+      
+      .search-input:focus {
+        width: 100%;
+      }
+    }
+
+    #page-transition-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #153a5b;
+        z-index: 2000;
+        pointer-events: all;
+        transform: translateX(0);
+        transition: transform 0.7s cubic-bezier(.77,0,.18,1);
+    }
+    #page-transition-overlay.hide {
+        transform: translateX(-100%);
+        pointer-events: none;
+    }
+
+    #ai-chatbot-popup {
+        animation: chatbot-fadein 0.25s;
+    }
+    @keyframes chatbot-fadein {
+        from { opacity:0; transform:translateY(30px);}
+        to { opacity:1; transform:translateY(0);}
+    }
+    #ai-chatbot-open:hover {
+        background: #205080;
+    }
+    @media (max-width: 600px) {
+        #ai-chatbot-popup {
+            left: 5vw !important;
+            max-width: 98vw !important;
+        }
+        #ai-chatbot-open {
+            left: 5vw !important;
+            padding: 12px 14px;
+            font-size: 0.95rem;
+        }
+    }
+    </style>
+</head>
+<body>
+    <header class="pro-header">
+        <div class="pro-container">
+            <div class="pro-logo">
+                <img src="images/Taenk-Trygt.png" alt="Logo">
+            </div>
+
+            <nav class="pro-nav">
+                <div class="pro-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </div>
+                <ul class="pro-nav-menu">
+                    <li><a href="index.html" class="pro-nav-link active">Forside</a></li>
+                    <li><a href="video.html" class="pro-nav-link">Video</a></li>
+                    <li><a href="quiz.html" class="pro-nav-link">Quiz</a></li>
+                    <li><a href="om-os.html" class="pro-nav-link">Hvem er vi?</a></li>
+                   
+                    <li>
+                        <button id="theme-toggle" class="theme-toggle" aria-label="Skift til mørk tilstand" title="Skift til mørk tilstand">
+                            <i class="fas fa-moon moon-icon"></i>
+                            <i class="fas fa-sun sun-icon" style="display: none;"></i>
+                        </button>
+                    </li>
+                    <li class="pro-highlight"><a id="auth-button" class="pro-btn-small">Opret konto</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero" data-aos="fade-in" data-aos-duration="1000">
+            <div class="hero-content">
+                <div class="container">
+                    <h1 data-aos="fade-up" data-aos-delay="200">Forstå og håndter angst</h1>
+                    <p data-aos="fade-up" data-aos-delay="400">Angst er en naturlig følelse, der skal beskytte dig mod fare. Men når angsten begynder at begrænse dig i din hverdag, kan du gøre noget ved det.</p>
+                    <div class="hero-buttons" data-aos="fade-up" data-aos-delay="600">
+                        <a href="video.html" class="btn primary-btn">Se vores video</a>
+                        <a href="quiz.html" class="btn secondary-btn">Tag en quiz</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="information scroll-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Hvad er angst?</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="info-grid">
+                    <div class="info-text slide-in-left">
+                        <p>Angst er en helt naturlig og fornuftig reaktion på stress eller fare, som hjælper os med at reagere hurtigt i truende situationer.</p>
+                        <p>Angst bliver først et problem, når det er uforholdsmæssigt stort, langvarigt eller forekommer uden at der er nogen reel trussel.</p>
+                        <p>I Danmark ved vi ikke helt hvor mange børn der lider af angst, men undersøgelser tyder på, at ca. 5 procent af alle børn i Danmark kæmper med angst i forskellige grader. 5 procent svarer til at der er et barn i hver klasse som kæmper med angst.</p>
+                        <p>Undersøgelser viser også, at omkring 350.000 voksne af angstlidelser, hvilket svarer til cirka 7% af befolkningen.</p>
+                    </div>
+                    <div class="info-image slide-in-right">
+                        <img src="https://thiswayup.org.au/wp-content/uploads/2020/08/signs_of_anxiety.png" alt="Tegn på angst">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="types-of-anxiety scroll-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Former for angst</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="anxiety-types-grid">
+                    <div class="anxiety-type-card stagger-item delay-100">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>Generaliseret angst</h3>
+                        <p>Angst for flere forskellige ting og situationer. Der er en konstant nervøsitet og anspændthed eller væren på vagt. Den opstår oftest gradvist.</p>
+                    </div>
+                    <div class="anxiety-type-card stagger-item delay-200">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3>Panikangst</h3>
+                        <p>Opleves som voldsom hjertebanken, svimmelhed, uvirkelighedsfølelse og angst for at blive sindssyg eller at dø. Mange unge oplever, at de ikke kan få vejret eller at de skal kaste op.</p>
+                    </div>
+                    <div class="anxiety-type-card stagger-item delay-300">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Social angst</h3>
+                        <p>Kendetegnet ved ubehag i sociale situationer. Den unge er bange for at gøre noget pinligt, være utilstrækkelig eller at blive grinet ad. Angsten kan blive så stor, at teenagere helt undgår at være sammen med andre.</p>
+                    </div>
+                    <div class="anxiety-type-card stagger-item delay-400">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-heartbeat"></i>
+                        </div>
+                        <h3>Sygdomsangst</h3>
+                        <p>Betyder at du er meget opmærksom på hvordan du har det, og hvordan kroppen reagerer. Der opstår en pludselig følelse af voldsom frygt og skræmmende fysiske symptomer.</p>
+                    </div>
+                    <div class="anxiety-type-card stagger-item delay-500">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3>OCD</h3>
+                        <p>OCD (Obsessiv-kompulsiv lidelse) er kendetegnet ved tilbagevendende tvangstanker og tvangshandlinger, som kan være meget tidskrævende og forstyrrende for hverdagen.</p>
+                    </div>
+                    <div class="anxiety-type-card stagger-item delay-600">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-door-open"></i>
+                        </div>
+                        <h3>Agorafobi</h3>
+                        <p>Agorafobi er angst for at befinde sig i situationer, hvor det kan være svært at flygte eller få hjælp, som f.eks. i store menneskemængder eller offentlige transportmidler.</p>
+                    </div>
+                    <div class="anxiety-type-card stagger-item delay-700">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-child"></i>
+                        </div>
+                        <h3>Seperationsangst</h3>
+                        <p>Seperationsangst opstår, når en person oplever intens frygt eller bekymring ved adskillelse fra en nær relation, som forældre eller en partner.</p>
+                    </div>
+                    <div class="anxiety-type-card stagger-item delay-800">
+                        <div class="anxiety-type-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>PTSD</h3>
+                        <p>PTSD (Posttraumatisk stresslidelse) er en angstlidelse, der opstår efter traumatiske oplevelser og kan føre til flashbacks, mareridt og intens frygt.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="statistics scroll-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Fakta om angst</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-card zoom-in delay-100">
+                        <div class="stat-number" data-count="350000">0</div>
+                        <p>voksne danskere oplever angst hvert år</p>
+                    </div>
+                    <div class="stat-card zoom-in delay-300">
+                        <div class="stat-number" data-count="9.6">0</div>
+                        <p>mia. kroner koster angst årligt samfundet</p>
+                    </div>
+                    <div class="stat-card zoom-in delay-500">
+                        <div class="stat-number" data-count="5">0</div>
+                        <p>% af alle børn i Danmark kæmper med angst</p>
+                    </div>
+                    <div class="stat-card zoom-in delay-700">
+                        <div class="stat-number" data-count="15">0</div>
+                        <p>% af alle børn har været i behandling for en psykisk sygdom inden de fylder 18 år</p>
+                    </div>
+                </div>
+                <p class="source fade-in delay-800">Kilde: Psykiatrifonden, Vidensråd for Forebyggelse og Sundhedsstyrelsen</p>
+            </div>
+        </section>
+
+        <section class="symptoms scroll-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Symptomer på angst</h2>
+                    <div class="underline"></div>
+                </div>
+                
+                <div id="symptoms-content" style="display: none;">
+                    <div class="symptoms-grid">
+                        <div class="symptoms-card slide-in-left delay-200">
+                            <h3>Fysiske symptomer</h3>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Hjertebanken</li>
+                                <li><i class="fas fa-check"></i> Sveden</li>
+                                <li><i class="fas fa-check"></i> Rysten</li>
+                                <li><i class="fas fa-check"></i> Åndenød</li>
+                                <li><i class="fas fa-check"></i> Svimmelhed</li>
+                                <li><i class="fas fa-check"></i> Maveproblemer</li>
+                            </ul>
+                        </div>
+                        <div class="symptoms-card fade-up delay-400">
+                            <h3>Følelsesmæssige symptomer</h3>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Nervøsitet</li>
+                                <li><i class="fas fa-check"></i> Frygt</li>
+                                <li><i class="fas fa-check"></i> Irritabilitet</li>
+                                <li><i class="fas fa-check"></i> Tristhed</li>
+                                <li><i class="fas fa-check"></i> Grådlabil</li>
+                                <li><i class="fas fa-check"></i> Anspændthed</li>
+                            </ul>
+                        </div>
+                        <div class="symptoms-card slide-in-right delay-600">
+                            <h3>Kognitive symptomer</h3>
+                            <ul>
+                                <li><i class="fas fa-check"></i> Tankemylder</li>
+                                <li><i class="fas fa-check"></i> Koncentrationsbesvær</li>
+                                <li><i class="fas fa-check"></i> Katastrofetanker</li>
+                                <li><i class="fas fa-check"></i> Bekymringstanker</li>
+                                <li><i class="fas fa-check"></i> Følelse af at miste kontrol</li>
+                                <li><i class="fas fa-check"></i> Uvirkelighedsfølelse</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="symptoms-login-required" style="background-color: var(--gray-100); border-radius: var(--border-radius-lg); padding: 2rem; text-align: center; box-shadow: var(--box-shadow);">
+                    <h3 style="color: var(--primary-color); margin-bottom: 1rem;">Log ind for at se symptomer på angst</h3>
+                    <p style="margin-bottom: 1.5rem;">For at få adgang til detaljeret information om symptomer på angst, skal du oprette en konto eller logge ind.</p>
+                    <div style="display: flex; justify-content: center; gap: 1rem;">
+                        <button id="symptoms-login-btn" class="btn primary-btn">Log ind</button>
+                        <button id="symptoms-signup-btn" class="btn secondary-btn">Opret konto</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta scroll-section">
+            <div class="container">
+                <div class="section-header fade-up">
+                    <h2>Vil du vide mere?</h2>
+                    <div class="underline"></div>
+                </div>
+                <div class="cta-grid">
+                    <div class="cta-card zoom-in delay-200">
+                        <div class="cta-icon">
+                            <i class="fas fa-video"></i>
+                        </div>
+                        <h3>Se vores video</h3>
+                        <p>Lær mere om angst gennem vores informative video</p>
+                        <a href="video.html" class="btn">Se video</a>
+                    </div>
+                    <div class="cta-card zoom-in delay-400">
+                        <div class="cta-icon">
+                            <i class="fas fa-question-circle"></i>
+                        </div>
+                        <h3>Tag en quiz</h3>
+                        <p>Find ud af mere om angst gennem vores quizzer</p>
+                        <a href="quiz.html" class="btn">Tag quiz</a>
+                    </div>
+                    <div class="cta-card zoom-in delay-600">
+                        <div class="cta-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Hvem er vi?</h3>
+                        <p>Lær mere om vores projekt og hvem vi er</p>
+                        <a href="om-os.html" class="btn">Læs mere</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Auth Modal -->
+    <div id="auth-modal" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; padding:30px; border-radius:10px; box-shadow:0 8px 16px rgba(0,0,0,0.3); z-index:1000; max-width:400px; width:90%;">
+        <div id="auth-tabs" style="display:flex; margin-bottom:20px; border-bottom:1px solid #ddd;">
+            <button id="login-tab" class="auth-tab active" style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid #007BFF; font-weight:bold; cursor:pointer;">Log Ind</button>
+            <button id="signup-tab" class="auth-tab" style="flex:1; padding:10px; background:none; border:none; border-bottom:2px solid transparent; cursor:pointer;">Opret Konto</button>
+        </div>
+        
+        <!-- Login Form -->
+        <form id="login-form" style="display:block;">
+            <div style="margin-bottom:15px;">
+                <label for="login-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+                <input type="email" id="login-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="margin-bottom:15px;">
+                <label for="login-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+                <input type="password" id="login-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Log Ind</button>
+                <button type="button" onclick="closeAuthModal()" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+            </div>
+            <div style="margin-top:15px; text-align:center;">
+                <a href="#" id="forgot-password" style="color:#007BFF; text-decoration:none; font-size:14px;">Glemt adgangskode?</a>
+            </div>
+        </form>
+        
+        <!-- Signup Form -->
+        <form id="signup-form" style="display:none;">
+            <div style="margin-bottom:15px;">
+                <label for="signup-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+                <input type="email" id="signup-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="margin-bottom:15px;">
+                <label for="signup-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Adgangskode:</label>
+                <input type="password" id="signup-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="margin-bottom:15px;">
+                <label for="signup-confirm-password" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Bekræft adgangskode:</label>
+                <input type="password" id="signup-confirm-password" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Opret Konto</button>
+                <button type="button" onclick="closeAuthModal()" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Annuller</button>
+            </div>
+        </form>
+        
+        <!-- Reset Password Form -->
+        <form id="reset-form" style="display:none;">
+            <div style="margin-bottom:15px;">
+                <label for="reset-email" style="display:block; margin-bottom:5px; font-weight:bold; color:#333;">Email:</label>
+                <input type="email" id="reset-email" required style="width:100%; padding:10px; border:1px solid #ddd; border-radius:5px; color:#333; background-color:#fff;" />
+            </div>
+            <div style="display:flex; justify-content:space-between; margin-top:20px;">
+                <button type="submit" style="padding:10px 20px; background:#007BFF; color:#fff; border:none; border-radius:5px; cursor:pointer;">Nulstil Adgangskode</button>
+                <button type="button" id="back-to-login" style="padding:10px 20px; background:#000; color:#fff; border:none; border-radius:5px; cursor:pointer;">Tilbage</button>
+            </div>
+        </form>
+        
+        <div id="auth-message" style="margin-top:15px; text-align:center; display:none;"></div>
+        
+        <div style="margin-top:20px; text-align:center;">
+            <p style="margin-bottom:10px; font-weight:bold; color:#333;">Eller log ind med</p>
+            <button id="google-signin" style="width:100%; padding:10px; margin-top:10px; background:#fff; color:#333; border:1px solid #ddd; border-radius:5px; display:flex; align-items:center; justify-content:center; cursor:pointer; font-family:'Poppins',sans-serif; font-weight:500; box-shadow:0 1px 3px rgba(0,0,0,0.1);">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google logo" style="width:18px; height:18px; margin-right:10px;">
+                Log ind med Google
+            </button>
+        </div>
+    </div>
+
+    <!-- Overlay -->
+    <div id="popup-overlay"></div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <div class="footer-logo">
+                        <img src="images/Taenk-Trygt.png" alt="Logo">
+                    </div>
+                    <!-- Search Bar Component -->
+                    <div class="search-container">
+                      <div class="search-wrapper">
+                        <input type="text" id="site-search" class="search-input" placeholder="Søg på siden..." aria-label="Søg på siden">
+                        <button type="button" id="search-button" class="search-button"></button>
+                      </div>
+                      <div id="search-results" class="search-results" style="display: none;"></div>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Sider</h4>
+                    <ul>
+                        <li><a href="index.html">Forside</a></li>
+                        <li><a href="video.html">Video</a></li>
+                        <li><a href="quiz.html">Quiz</a></li>
+                        <li><a href="om-os.html">Hvem er vi?</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Kontakt</h4>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> kontakt@angstblandtunge.dk</li>
+                        <li><i class="fas fa-phone"></i> +45 12 34 56 78</li>
+                        <li><i class="fas fa-map-marker-alt"></i> København, Danmark</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Angst blandt unge. Alle rettigheder forbeholdes.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Page Transition Overlay -->
+    <div id="page-transition-overlay" class="active"></div>
+
+    <!-- AI Psykolog Chatbot Popup -->
+    <div id="ai-chatbot-popup" style="display:none; position:fixed; bottom:90px; left:30px; z-index:3000; box-shadow:0 4px 24px rgba(0,0,0,0.25); border-radius:12px; background:#fff; max-width:370px; width:90vw;">
+      <div style="display:flex; align-items:center; justify-content:space-between; background:#153a5b; color:#fff; padding:10px 16px; border-radius:12px 12px 0 0;">
+        <span style="font-weight:600;">Chat med din AI psykolog</span>
+        <button id="ai-chatbot-close" style="background:none; border:none; color:#fff; font-size:1.3rem; cursor:pointer;">&times;</button>
+      </div>
+      <div style="width:100%; height:420px; overflow:hidden; border-radius:0 0 12px 12px; position:relative;">
+        <div style="width:100%; height:420px; overflow:hidden; border-radius:0 0 12px 12px; position:relative;">
+          <iframe 
+            src="https://psykologbot.vercel.app/" 
+            width="100%" 
+            height="470" 
+            style="border:none; position:relative; top:-50px;"
+            title="AI Psykolog Bot"
+            allow="camera; microphone"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <button id="ai-chatbot-open" aria-label="Chat med din AI psykolog" style="position:fixed; bottom:30px; left:30px; z-index:3001; background:#153a5b; color:#fff; border:none; border-radius:50px; box-shadow:0 2px 8px rgba(0,0,0,0.18); padding:14px 22px; font-size:1rem; font-weight:600; display:flex; align-items:center; gap:10px; cursor:pointer; transition:background 0.2s;">
+      <i class="fas fa-comments" style="font-size:1.2rem;"></i>
+      Chat med din AI psykolog
+    </button>
+
+    <script>
+    // Initialize AOS and other functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: false,
+            mirror: false
+        });
+        
+        initScrollAnimations();
+        initCounterAnimations();
+        checkAuthForSymptoms();
+        initSearchFunctionality();
+        initNavigationAndUI();
+    });
+
+    // Custom scroll animations
+    function initScrollAnimations() {
+        const scrollElements = document.querySelectorAll('.fade-up, .fade-in, .slide-in-left, .slide-in-right, .zoom-in, .stagger-item');
+        
+        const elementInView = (el, dividend = 1) => {
+            const elementTop = el.getBoundingClientRect().top;
+            return (
+                elementTop <= (window.innerHeight || document.documentElement.clientHeight) / dividend
+            );
+        };
+        
+        const displayScrollElement = (element) => {
+            element.classList.add('active');
+        };
+        
+        const handleScrollAnimation = () => {
+            scrollElements.forEach((el) => {
+                if (elementInView(el, 1.25)) {
+                    displayScrollElement(el);
+                }
+            });
+        };
+        
+        handleScrollAnimation();
+        window.addEventListener('scroll', handleScrollAnimation);
+    }
+    
+    // Counter animations for statistics
+    function initCounterAnimations() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        
+        const animateCounter = (el) => {
+            const target = parseInt(el.getAttribute('data-count'));
+            const duration = 2000;
+            const step = target / (duration / 16);
+            let current = 0;
+            
+            if (el.getAttribute('data-count').includes('.')) {
+                const targetDecimal = parseFloat(el.getAttribute('data-count'));
+                const stepDecimal = targetDecimal / (duration / 16);
+                let currentDecimal = 0;
+                
+                const timer = setInterval(() => {
+                    currentDecimal += stepDecimal;
+                    if (currentDecimal >= targetDecimal) {
+                        clearInterval(timer);
+                        el.textContent = targetDecimal;
+                    } else {
+                        el.textContent = currentDecimal.toFixed(1);
+                    }
+                }, 16);
+                
+                return;
+            }
+            
+            const timer = setInterval(() => {
+                current += step;
+                if (current >= target) {
+                    clearInterval(timer);
+                    el.textContent = target.toLocaleString();
+                } else {
+                    el.textContent = Math.floor(current).toLocaleString();
+                }
+            }, 16);
+        };
+        
+        const handleCounterAnimation = () => {
+            statNumbers.forEach((el) => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top <= window.innerHeight && rect.bottom >= 0 && !el.classList.contains('animated')) {
+                    el.classList.add('animated');
+                    animateCounter(el);
+                }
+            });
+        };
+        
+        window.addEventListener('scroll', handleCounterAnimation);
+        handleCounterAnimation();
+    }
+
+    // Search functionality
+    function initSearchFunctionality() {
+        const searchInput = document.getElementById('site-search');
+        const searchButton = document.getElementById('search-button');
+        const searchResults = document.getElementById('search-results');
+        
+        const siteContent = [
+            { title: 'Forside', url: 'index.html', content: 'Angst er en naturlig følelse, der skal beskytte dig mod fare. Men når angsten begynder at begrænse dig i din hverdag, kan du gøre noget ved det.' },
+            { title: 'Video', url: 'video.html', content: 'Lær mere om angst gennem vores informative video. Vores video er under produktion og kommer snart!' },
+            { title: 'Quiz', url: 'quiz.html', content: 'Test din viden om angst eller find ud af, hvilken type angst du muligvis oplever.' },
+            { title: 'Hvem er vi?', url: 'om-os.html', content: 'Lær mere om vores team og projektet bag hjemmesiden om angst blandt unge.' },
+            { title: 'Generaliseret angst', url: 'index.html#generaliseret', content: 'Angst for flere forskellige ting og situationer. Der er en konstant nervøsitet og anspændthed eller væren på vagt.' },
+            { title: 'Panikangst', url: 'index.html#panik', content: 'Opleves som voldsom hjertebanken, svimmelhed, uvirkelighedsfølelse og angst for at blive sindssyg eller at dø.' },
+            { title: 'Social angst', url: 'index.html#social', content: 'Kendetegnet ved ubehag i sociale situationer. Den unge er bange for at gøre noget pinligt, være utilstrækkelig eller at blive grinet ad.' }
+        ];
+        
+        function performSearch() {
+            const query = searchInput.value.trim().toLowerCase();
+            
+            if (query.length < 2) {
+                searchResults.style.display = 'none';
+                return;
+            }
+            
+            const results = siteContent.filter(item => 
+                item.title.toLowerCase().includes(query) || 
+                item.content.toLowerCase().includes(query)
+            );
+            
+            if (results.length > 0) {
+                displayResults(results, query);
+            } else {
+                searchResults.innerHTML = '<div class="search-result-item">Ingen resultater fundet</div>';
+                searchResults.style.display = 'block';
+            }
+        }
+        
+        function displayResults(results, query) {
+            searchResults.innerHTML = '';
+            
+            results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'search-result-item';
+                
+                const titleHighlighted = highlightText(result.title, query);
+                const contentHighlighted = highlightText(result.content, query);
+                
+                resultItem.innerHTML = `
+                    <div class="search-result-title">${titleHighlighted}</div>
+                    <div class="search-result-description">${contentHighlighted.substring(0, 100)}${result.content.length > 100 ? '...' : ''}</div>
+                `;
+                
+                resultItem.addEventListener('click', function() {
+                    window.location.href = result.url;
+                });
+                
+                searchResults.appendChild(resultItem);
+            });
+            
+            searchResults.style.display = 'block';
+        }
+        
+        function highlightText(text, query) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<span class="search-highlight">$1</span>');
+        }
+        
+        searchInput.addEventListener('input', performSearch);
+        searchButton.addEventListener('click', performSearch);
+        
+        document.addEventListener('click', function(e) {
+            if (!searchInput.contains(e.target) && !searchButton.contains(e.target) && !searchResults.contains(e.target)) {
+                searchResults.style.display = 'none';
+            }
+        });
+        
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                searchResults.style.display = 'none';
+            }
+        });
+    }
+
+    // Navigation and UI initialization
+    function initNavigationAndUI() {
+        // Professional Navigation Bar Script
+        const menuToggle = document.querySelector(".pro-menu-toggle");
+        const navMenu = document.querySelector(".pro-nav-menu");
+        const body = document.body;
+        
+        if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", function() {
+                navMenu.classList.toggle("active");
+                
+                if (navMenu.classList.contains("active")) {
+                    body.style.overflow = "hidden";
+                } else {
+                    body.style.overflow = "";
+                }
+            });
+        }
+        
+        document.addEventListener("click", function(e) {
+            if (
+                navMenu && 
+                navMenu.classList.contains("active") && 
+                !e.target.closest(".pro-nav") && 
+                !e.target.closest(".pro-menu-toggle")
+            ) {
+                navMenu.classList.remove("active");
+                body.style.overflow = "";
+            }
+        });
+        
+        // AI Chatbot popup logic
+        document.getElementById('ai-chatbot-open').onclick = function() {
+            document.getElementById('ai-chatbot-popup').style.display = 'block';
+            this.style.display = 'none';
+        };
+        document.getElementById('ai-chatbot-close').onclick = function() {
+            document.getElementById('ai-chatbot-popup').style.display = 'none';
+            document.getElementById('ai-chatbot-open').style.display = 'flex';
+        };
+
+        // Page transition effect
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                const overlay = document.getElementById('page-transition-overlay');
+                if (overlay) {
+                    overlay.classList.add('hide');
+                    overlay.classList.remove('active');
+                }
+            }, 80);
+        });
+    }
+
+    // Firebase Authentication Functions
+    let currentUser = null;
+
+    // Wait for Firebase to be available
+    function waitForFirebase() {
+        return new Promise((resolve) => {
+            const checkFirebase = () => {
+                if (window.firebaseAuth && window.firebaseAuthMethods) {
+                    resolve();
+                } else {
+                    setTimeout(checkFirebase, 100);
+                }
+            };
+            checkFirebase();
+        });
+    }
+
+    // Initialize authentication after Firebase is loaded
+    waitForFirebase().then(() => {
+        const auth = window.firebaseAuth;
+        const { 
+            signInWithEmailAndPassword, 
+            createUserWithEmailAndPassword, 
+            sendPasswordResetEmail, 
+            signOut, 
+            onAuthStateChanged, 
+            GoogleAuthProvider, 
+            signInWithPopup 
+        } = window.firebaseAuthMethods;
+
+        // Auth state observer
+        onAuthStateChanged(auth, (user) => {
+            currentUser = user;
+            updateAuthButton();
+            checkAuthForSymptoms();
+        });
+
+        // Auth Modal Functions
+        document.getElementById('auth-button').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('auth-modal').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+        });
+
+        window.closeAuthModal = function() {
+            document.getElementById('auth-modal').style.display = 'none';
+            document.getElementById('popup-overlay').style.display = 'none';
+        }
+
+        // Tab switching
+        document.getElementById('login-tab').addEventListener('click', function() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('reset-form').style.display = 'none';
+            document.getElementById('login-tab').classList.add('active');
+            document.getElementById('signup-tab').classList.remove('active');
+            hideAuthMessage();
+        });
+
+        document.getElementById('signup-tab').addEventListener('click', function() {
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+            document.getElementById('reset-form').style.display = 'none';
+            document.getElementById('login-tab').classList.remove('active');
+            document.getElementById('signup-tab').classList.add('active');
+            hideAuthMessage();
+        });
+
+        document.getElementById('forgot-password').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('reset-form').style.display = 'block';
+            hideAuthMessage();
+        });
+
+        document.getElementById('back-to-login').addEventListener('click', function() {
+            document.getElementById('login-form').style.display = 'block';
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('reset-form').style.display = 'none';
+            hideAuthMessage();
+        });
+
+        // Handle login form submission
+        document.getElementById('login-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            
+            signInWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    showAuthMessage('Du er nu logget ind!', false);
+                    setTimeout(() => {
+                        closeAuthModal();
+                    }, 1500);
+                })
+                .catch((error) => {
+                    console.error('Login error:', error);
+                    let errorMessage = 'Der opstod en fejl ved login';
+                    if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password' || error.code === 'auth/invalid-credential') {
+                        errorMessage = 'Forkert email eller adgangskode';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = 'Ugyldig email-adresse';
+                    } else if (error.code === 'auth/too-many-requests') {
+                        errorMessage = 'For mange forsøg. Prøv igen senere.';
+                    }
+                    showAuthMessage(errorMessage);
+                });
+        });
+        
+        // Handle Google Sign-in
+        document.getElementById('google-signin').addEventListener('click', function() {
+            const provider = new GoogleAuthProvider();
+            provider.addScope('email');
+            provider.addScope('profile');
+            
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    showAuthMessage('Du er nu logget ind med Google!', false);
+                    setTimeout(() => {
+                        closeAuthModal();
+                    }, 1500);
+                })
+                .catch((error) => {
+                    console.error('Google sign-in error:', error);
+                    let errorMessage = 'Der opstod en fejl ved Google login';
+                    if (error.code === 'auth/popup-closed-by-user') {
+                        errorMessage = 'Login blev annulleret';
+                    } else if (error.code === 'auth/popup-blocked') {
+                        errorMessage = 'Popup blev blokeret. Tillad popups for denne side.';
+                    } else if (error.code === 'auth/cancelled-popup-request') {
+                        errorMessage = 'Login blev annulleret';
+                    }
+                    showAuthMessage(errorMessage);
+                });
+        });
+
+        // Handle signup form submission
+        document.getElementById('signup-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('signup-email').value;
+            const password = document.getElementById('signup-password').value;
+            const confirmPassword = document.getElementById('signup-confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                showAuthMessage('Adgangskoderne matcher ikke');
+                return;
+            }
+            
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    showAuthMessage('Konto oprettet! Du er nu logget ind.', false);
+                    setTimeout(() => {
+                        closeAuthModal();
+                    }, 1500);
+                })
+                .catch((error) => {
+                    console.error('Signup error:', error);
+                    let errorMessage = 'Der opstod en fejl ved oprettelse af konto';
+                    if (error.code === 'auth/email-already-in-use') {
+                        errorMessage = 'Denne email er allerede i brug';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = 'Ugyldig email-adresse';
+                    } else if (error.code === 'auth/weak-password') {
+                        errorMessage = 'Adgangskoden er for svag';
+                    }
+                    showAuthMessage(errorMessage);
+                });
+        });
+
+        // Handle reset password form submission
+        document.getElementById('reset-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('reset-email').value;
+            
+            sendPasswordResetEmail(auth, email)
+                .then(() => {
+                    showAuthMessage('Instruktioner til nulstilling af adgangskode er sendt til din email.', false);
+                    setTimeout(() => {
+                        document.getElementById('login-tab').click();
+                    }, 3000);
+                })
+                .catch((error) => {
+                    console.error('Password reset error:', error);
+                    let errorMessage = 'Der opstod en fejl ved anmodning om nulstilling af adgangskode';
+                    if (error.code === 'auth/user-not-found') {
+                        errorMessage = 'Ingen bruger fundet med denne email';
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = 'Ugyldig email-adresse';
+                    }
+                    showAuthMessage(errorMessage);
+                });
+        });
+
+        function updateAuthButton() {
+            const authButton = document.getElementById('auth-button');
+            
+            if (currentUser) {
+                authButton.textContent = 'Log Ud';
+                authButton.onclick = function(e) {
+                    e.preventDefault();
+                    signOut(auth).then(() => {
+                        // Sign-out successful
+                    }).catch((error) => {
+                        console.error('Sign out error:', error);
+                    });
+                };
+            } else {
+                authButton.textContent = 'Opret Konto';
+                authButton.onclick = function(e) {
+                    e.preventDefault();
+                    document.getElementById('auth-modal').style.display = 'block';
+                    document.getElementById('popup-overlay').style.display = 'block';
+                };
+            }
+        }
+
+        function showAuthMessage(message, isError = true) {
+            const messageElement = document.getElementById('auth-message');
+            messageElement.textContent = message;
+            messageElement.style.display = 'block';
+            
+            if (isError) {
+                messageElement.classList.add('error');
+                messageElement.classList.remove('success');
+            } else {
+                messageElement.classList.add('success');
+                messageElement.classList.remove('error');
+            }
+        }
+
+        function hideAuthMessage() {
+            document.getElementById('auth-message').style.display = 'none';
+        }
+
+        // Add event listeners for symptoms login buttons
+        document.getElementById('symptoms-login-btn').addEventListener('click', function() {
+            document.getElementById('auth-modal').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+            document.getElementById('login-tab').click();
+        });
+        
+        document.getElementById('symptoms-signup-btn').addEventListener('click', function() {
+            document.getElementById('auth-modal').style.display = 'block';
+            document.getElementById('popup-overlay').style.display = 'block';
+            document.getElementById('signup-tab').click();
+        });
+    });
+
+    // Function to check authentication for symptoms section
+    function checkAuthForSymptoms() {
+        const symptomsContent = document.getElementById('symptoms-content');
+        const symptomsLoginRequired = document.getElementById('symptoms-login-required');
+        
+        if (currentUser) {
+            // User is logged in, show content
+            symptomsContent.style.display = 'block';
+            symptomsLoginRequired.style.display = 'none';
+        } else {
+            // User is not logged in, show login required message
+            symptomsContent.style.display = 'none';
+            symptomsLoginRequired.style.display = 'block';
+        }
+    }
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>
